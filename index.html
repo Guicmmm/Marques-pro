@@ -1,0 +1,3223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>Marques Pro</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #07111f;
+      color: #f4f7fb;
+      min-height: 100vh;
+    }
+
+    button,
+    select,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app {
+      max-width: 1100px;
+      margin: auto;
+      padding-bottom: 90px;
+    }
+
+    header {
+      padding: 22px 18px 14px;
+      background: linear-gradient(180deg, #0c1c31, #07111f);
+      border-bottom: 1px solid #1a2b40;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(15px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand h1 {
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: -.5px;
+    }
+
+    .brand h1 span {
+      color: #24d98a;
+    }
+
+    .status-pill {
+      background: #102a27;
+      border: 1px solid #1d6954;
+      color: #48e6a2;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .hero {
+      padding: 24px 18px 12px;
+    }
+
+    .hero h2 {
+      font-size: 28px;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .hero p {
+      color: #8ea2ba;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .panel {
+      margin: 14px 18px;
+      padding: 16px;
+      background: #0c1a2b;
+      border: 1px solid #1b3048;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.15);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 700px) {
+      .grid {
+        grid-template-columns: 1.5fr 1fr 1fr;
+      }
+    }
+
+    label {
+      display: block;
+      color: #91a4bb;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+      letter-spacing: .5px;
+    }
+
+    select,
+    input {
+      width: 100%;
+      height: 44px;
+      border-radius: 10px;
+      border: 1px solid #263c56;
+      background: #081525;
+      color: white;
+      padding: 0 12px;
+      outline: none;
+    }
+
+    select:focus,
+    input:focus {
+      border-color: #27d98b;
+    }
+
+    .analyze-btn {
+      width: 100%;
+      height: 46px;
+      border: 0;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #20d687, #0fbf72);
+      color: #04120c;
+      font-weight: 900;
+      margin-top: 12px;
+      box-shadow: 0 8px 25px rgba(32,214,135,.15);
+    }
+
+    .analyze-btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 18px 10px;
+      scrollbar-width: none;
+    }
+
+    .tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab {
+      flex: 0 0 auto;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid #263b54;
+      background: #0c1a2a;
+      color: #91a4bb;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .tab.active {
+      background: #173a32;
+      border-color: #2bcf8b;
+      color: #48e6a2;
+    }
+
+    .search-box {
+      margin: 4px 18px 14px;
+    }
+
+    .section-title {
+      padding: 8px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .section-title h3 {
+      font-size: 16px;
+    }
+
+    .section-title span {
+      color: #71869f;
+      font-size: 11px;
+    }
+
+    #results {
+      padding: 0 18px;
+    }
+
+    .empty {
+      padding: 30px 15px;
+      text-align: center;
+      background: #0c1a2b;
+      border: 1px dashed #29405b;
+      border-radius: 15px;
+      color: #8295ad;
+      line-height: 1.6;
+      font-size: 13px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 35px 15px;
+      color: #72e8b0;
+    }
+
+    .spinner {
+      width: 32px;
+      height: 32px;
+      margin: 0 auto 12px;
+      border: 3px solid #183328;
+      border-top-color: #28db8d;
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .game-card {
+      background: #0c1a2b;
+      border: 1px solid #1b3048;
+      border-radius: 17px;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+
+    .game-head {
+      padding: 14px;
+      border-bottom: 1px solid #192c42;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .league {
+      color: #8fa4bb;
+      font-size: 11px;
+      margin-bottom: 6px;
+    }
+
+    .date {
+      color: #627992;
+      font-size: 10px;
+    }
+
+    .confidence {
+      padding: 7px 9px;
+      background: #16352d;
+      color: #4be4a1;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .teams {
+      padding: 17px 14px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .team {
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.3;
+    }
+
+    .vs {
+      color: #5f738b;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      padding: 0 14px 14px;
+    }
+
+    .metric {
+      background: #081525;
+      border: 1px solid #172b42;
+      border-radius: 9px;
+      padding: 8px 4px;
+      text-align: center;
+    }
+
+    .metric b {
+      display: block;
+      font-size: 14px;
+    }
+
+    .metric span {
+      display: block;
+      color: #637991;
+      font-size: 8px;
+      margin-top: 3px;
+      text-transform: uppercase;
+    }
+
+    .probabilities {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 0 14px 14px;
+    }
+
+    .prob {
+      padding: 10px;
+      background: #0a1727;
+      border-radius: 9px;
+      border: 1px solid #172a40;
+      text-align: center;
+    }
+
+    .prob strong {
+      display: block;
+      font-size: 17px;
+    }
+
+    .prob small {
+      color: #71869e;
+      font-size: 9px;
+    }
+
+    .props {
+      padding: 0 14px 14px;
+    }
+
+    .props-title {
+      font-size: 12px;
+      font-weight: 900;
+      color: #d8e2ed;
+      margin-bottom: 8px;
+    }
+
+    .prop {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding: 10px;
+      margin-bottom: 6px;
+      background: #081525;
+      border: 1px solid #182d44;
+      border-radius: 9px;
+    }
+
+    .prop-name {
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .prop-meta {
+      color: #71869e;
+      font-size: 9px;
+      margin-top: 3px;
+    }
+
+    .prop-right {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .prop-prob {
+      color: #45e29e;
+      font-weight: 900;
+      font-size: 12px;
+    }
+
+    .prop-odd {
+      color: #c8d4e2;
+      font-size: 10px;
+    }
+
+    .value {
+      color: #f0c75e;
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .details {
+      border-top: 1px solid #192c42;
+    }
+
+    .details summary {
+      padding: 12px 14px;
+      color: #9eb0c5;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .details-content {
+      padding: 0 14px 14px;
+    }
+
+    .lineup-team {
+      margin-bottom: 14px;
+    }
+
+    .lineup-team h4 {
+      color: #d9e3ed;
+      font-size: 11px;
+      margin-bottom: 7px;
+    }
+
+    .players {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .player {
+      padding: 5px 7px;
+      border-radius: 6px;
+      background: #091728;
+      border: 1px solid #172c43;
+      color: #8195ac;
+      font-size: 9px;
+    }
+
+    .injury {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px;
+      margin-bottom: 5px;
+      background: #101b29;
+      border-radius: 7px;
+      font-size: 10px;
+    }
+
+    .injury-name {
+      color: #c8d4e1;
+    }
+
+    .injury-status {
+      color: #e99696;
+    }
+
+    .exact-scores {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .score {
+      padding: 9px;
+      text-align: center;
+      background: #081525;
+      border: 1px solid #192e45;
+      border-radius: 8px;
+    }
+
+    .score strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .score small {
+      color: #647990;
+      font-size: 8px;
+    }
+
+    .real-odds {
+      margin-top: 8px;
+      color: #f0c75e;
+      font-size: 10px;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 65px;
+      background: rgba(7,17,31,.96);
+      border-top: 1px solid #1a2d43;
+      display: flex;
+      justify-content: center;
+      z-index: 50;
+    }
+
+    .nav-inner {
+      width: 100%;
+      max-width: 700px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 0;
+      color: #60758d;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .nav-btn.active {
+      color: #43dfa0;
+    }
+
+    .nav-icon {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 3px;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 9px;
+    }
+
+    .status-card {
+      background: #081525;
+      border: 1px solid #192d44;
+      border-radius: 10px;
+      padding: 13px;
+    }
+
+    .status-card span {
+      display: block;
+      color: #6e8299;
+      font-size: 9px;
+      margin-bottom: 6px;
+    }
+
+    .status-card strong {
+      font-size: 16px;
+    }
+
+    .green {
+      color: #48e4a1;
+    }
+
+    .yellow {
+      color: #f1ca5f;
+    }
+
+    .red {
+      color: #ed8181;
+    }
+
+    @media (max-width: 450px) {
+      .metrics {
+        grid-template-columns: repeat(5, minmax(0,1fr));
+      }
+
+      .metric b {
+        font-size: 12px;
+      }
+
+      .metric span {
+        font-size: 7px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <header>
+    <div class="brand">
+      <h1>Marques <span>Pro</span></h1>
+      <div class="status-pill" id="connectionStatus">● ONLINE</div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h2>Encontre as melhores Props</h2>
+    <p>
+      Análise estatística para apostas em futebol:
+      gols, BTTS, escanteios, cartões, chutes,
+      chutes no gol, resultado e dupla chance.
+    </p>
+  </section>
+
+  <section class="panel">
+
+    <div class="grid">
+
+      <div>
+        <label for="leagueSelect">Campeonato</label>
+
+        <select id="leagueSelect">
+          <option value="">Carregando campeonatos...</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="daysSelect">Período</label>
+
+        <select id="daysSelect">
+          <option value="1">Hoje</option>
+          <option value="2">Hoje + amanhã</option>
+          <option value="3">Próximos 3 dias</option>
+          <option value="7">Próximos 7 dias</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="oddTarget">Odd alvo</label>
+
+        <select id="oddTarget">
+          <option value="1.5">1.50+</option>
+          <option value="2">2.00+</option>
+          <option value="3">3.00+</option>
+          <option value="5">5.00+</option>
+          <option value="10">10.00+</option>
+        </select>
+      </div>
+
+    </div>
+
+    <button class="analyze-btn" id="analyzeBtn" onclick="runAnalysis()">
+      🔎 ANALISAR JOGOS
+    </button>
+
+  </section>
+
+  <div class="tabs">
+
+    <button class="tab active" data-market="all">
+      Todos
+    </button>
+
+    <button class="tab" data-market="goals">
+      ⚽ Gols
+    </button>
+
+    <button class="tab" data-market="btts">
+      🤝 BTTS
+    </button>
+
+    <button class="tab" data-market="corners">
+      🚩 Escanteios
+    </button>
+
+    <button class="tab" data-market="cards">
+      🟨 Cartões
+    </button>
+
+    <button class="tab" data-market="shots">
+      🎯 Chutes
+    </button>
+
+    <button class="tab" data-market="shots_on_target">
+      🥅 Chutes no gol
+    </button>
+
+    <button class="tab" data-market="double_chance">
+      🛡 Dupla chance
+    </button>
+
+    <button class="tab" data-market="result">
+      🏆 Resultado
+    </button>
+
+  </div>
+
+  <div class="search-box">
+    <input
+      type="text"
+      id="teamSearch"
+      placeholder="🔎 Procurar por time..."
+      oninput="renderGames()"
+    >
+  </div>
+
+  <div class="section-title">
+    <h3>Jogos analisados</h3>
+    <span id="gameCount">0 jogos</span>
+  </div>
+
+  <div id="results">
+
+    <div class="empty">
+      Selecione um campeonato e clique em
+      <strong>ANALISAR JOGOS</strong>.
+    </div>
+
+  </div>
+
+  <section class="panel" id="statusPanel" style="display:none">
+
+    <div class="section-title" style="padding:0 0 12px">
+      <h3>Status do sistema</h3>
+    </div>
+
+    <div class="status-grid">
+
+      <div class="status-card">
+        <span>API Futebol</span>
+        <strong id="statusApiFootball">--</strong>
+      </div>
+
+      <div class="status-card">
+        <span>Odds API</span>
+        <strong id="statusOdds">--</strong>
+      </div>
+
+      <div class="status-card">
+        <span>Campeonatos</span>
+        <strong id="statusLeagues">--</strong>
+      </div>
+
+      <div class="status-card">
+        <span>Cache</span>
+        <strong id="statusCache">--</strong>
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+<nav class="bottom-nav">
+
+  <div class="nav-inner">
+
+    <button class="nav-btn active" onclick="showSection('analysis', this)">
+      <span class="nav-icon">📊</span>
+      Análise
+    </button>
+
+    <button class="nav-btn" onclick="showSection('props', this)">
+      <span class="nav-icon">🎯</span>
+      Props
+    </button>
+
+    <button class="nav-btn" onclick="showSection('status', this)">
+      <span class="nav-icon">⚙️</span>
+      Sistema
+    </button>
+
+  </div>
+
+</nav>
+
+
+<script>
+
+  /* =========================================================
+     ESTADO GLOBAL
+  ========================================================= */
+
+  let leagues = [];
+  let games = [];
+  let currentMarket = "all";
+
+
+  /* =========================================================
+     LISTA DE SEGURANÇA
+     Caso /api/leagues falhe, o frontend ainda consegue
+     mostrar os campeonatos.
+  ========================================================= */
+
+  const fallbackLeagues = [
+
+    {
+      name: "Brasil",
+      country: "Brasil",
+      id: 71
+    },
+
+    {
+      name: "Brasil - Série B",
+      country: "Brasil",
+      id: 72
+    },
+
+    {
+      name: "Inglaterra",
+      country: "Inglaterra",
+      id: 39
+    },
+
+    {
+      name: "Inglaterra - Championship",
+      country: "Inglaterra",
+      id: 40
+    },
+
+    {
+      name: "Espanha",
+      country: "Espanha",
+      id: 140
+    },
+
+    {
+      name: "Espanha - Segunda",
+      country: "Espanha",
+      id: 141
+    },
+
+    {
+      name: "Itália",
+      country: "Itália",
+      id: 135
+    },
+
+    {
+      name: "Itália - Série B",
+      country: "Itália",
+      id: 136
+    },
+
+    {
+      name: "Alemanha",
+      country: "Alemanha",
+      id: 78
+    },
+
+    {
+      name: "Alemanha - 2. Bundesliga",
+      country: "Alemanha",
+      id: 79
+    },
+
+    {
+      name: "França",
+      country: "França",
+      id: 61
+    },
+
+    {
+      name: "França - Ligue 2",
+      country: "França",
+      id: 62
+    },
+
+    {
+      name: "Portugal",
+      country: "Portugal",
+      id: 94
+    },
+
+    {
+      name: "Holanda",
+      country: "Holanda",
+      id: 88
+    },
+
+    {
+      name: "Bélgica",
+      country: "Bélgica",
+      id: 144
+    },
+
+    {
+      name: "Turquia",
+      country: "Turquia",
+      id: 203
+    },
+
+    {
+      name: "Grécia",
+      country: "Grécia",
+      id: 197
+    },
+
+    {
+      name: "Áustria",
+      country: "Áustria",
+      id: 218
+    },
+
+    {
+      name: "Suíça",
+      country: "Suíça",
+      id: 207
+    },
+
+    {
+      name: "Estados Unidos - MLS",
+      country: "Estados Unidos",
+      id: 253
+    },
+
+    {
+      name: "México",
+      country: "México",
+      id: 262
+    },
+
+    {
+      name: "Argentina",
+      country: "Argentina",
+      id: 128
+    },
+
+    {
+      name: "Colômbia",
+      country: "Colômbia",
+      id: 239
+    },
+
+    {
+      name: "Chile",
+      country: "Chile",
+      id: 265
+    },
+
+    {
+      name: "Uruguai",
+      country: "Uruguai",
+      id: 268
+    },
+
+    {
+      name: "Japão",
+      country: "Japão",
+      id: 98
+    },
+
+    {
+      name: "Coreia do Sul",
+      country: "Coreia do Sul",
+      id: 292
+    },
+
+    {
+      name: "Arábia Saudita",
+      country: "Arábia Saudita",
+      id: 307
+    },
+
+    {
+      name: "Emirados Árabes",
+      country: "Emirados Árabes",
+      id: 301
+    },
+
+    {
+      name: "África do Sul",
+      country: "África do Sul",
+      id: 288
+    }
+
+  ];
+
+
+  /* =========================================================
+     CARREGAR CAMPEONATOS
+  ========================================================= */
+
+  async function loadLeagues() {
+
+    const select = document.getElementById("leagueSelect");
+
+    select.innerHTML =
+      '<option value="">Carregando campeonatos...</option>';
+
+    try {
+
+      const response = await fetch(
+        "/api/leagues",
+        {
+          method: "GET",
+          cache: "no-store"
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          "HTTP " + response.status
+        );
+      }
+
+      let data = await response.json();
+
+      console.log(
+        "RESPOSTA /api/leagues:",
+        data
+      );
+
+      /*
+        Aceita vários formatos:
+
+        [
+          {...},
+          {...}
+        ]
+
+        ou
+
+        {
+          leagues: [...]
+        }
+
+        ou
+
+        {
+          data: [...]
+        }
+      */
+
+      if (typeof data === "string") {
+
+        try {
+          data = JSON.parse(data);
+        } catch (e) {
+          console.warn(
+            "Resposta veio como texto."
+          );
+        }
+
+      }
+
+      if (Array.isArray(data)) {
+
+        leagues = data;
+
+      } else if (
+        data &&
+        Array.isArray(data.leagues)
+      ) {
+
+        leagues = data.leagues;
+
+      } else if (
+        data &&
+        Array.isArray(data.data)
+      ) {
+
+        leagues = data.data;
+
+      } else {
+
+        leagues = [];
+
+      }
+
+
+      /*
+        Normaliza os objetos
+      */
+
+      leagues = leagues
+        .filter(Boolean)
+        .map((league) => {
+
+          return {
+
+            name:
+              league.name ||
+              league.title ||
+              league.league ||
+              league.key ||
+              "",
+
+            country:
+              league.country ||
+              "",
+
+            id:
+              league.id ||
+              league.league_id ||
+              null,
+
+            odds:
+              league.odds === true
+
+          };
+
+        })
+        .filter(
+          league => league.name
+        );
+
+
+      /*
+        Se a API não retornou nada,
+        usa a lista de segurança.
+      */
+
+      if (!leagues.length) {
+
+        console.warn(
+          "API não retornou campeonatos. Usando fallback."
+        );
+
+        leagues = [...fallbackLeagues];
+
+      }
+
+
+      /*
+        Remove duplicados
+      */
+
+      const unique = {};
+
+      leagues.forEach(
+        league => {
+
+          unique[
+            league.name
+          ] = league;
+
+        }
+      );
+
+      leagues = Object.values(unique);
+
+
+      /*
+        Preenche select
+      */
+
+      select.innerHTML = "";
+
+      leagues.forEach(
+        (league, index) => {
+
+          const option =
+            document.createElement(
+              "option"
+            );
+
+          option.value =
+            league.name;
+
+          option.textContent =
+            league.country &&
+            league.country !== league.name
+
+              ? `${league.name} — ${league.country}`
+
+              : league.name;
+
+          /*
+            Brasil como padrão
+          */
+
+          if (
+            league.name === "Brasil"
+          ) {
+
+            option.selected = true;
+
+          }
+
+          select.appendChild(
+            option
+          );
+
+        }
+      );
+
+
+      /*
+        Se Brasil não existir,
+        seleciona o primeiro.
+      */
+
+      if (
+        !Array.from(
+          select.options
+        ).some(
+          option =>
+            option.value === "Brasil"
+        )
+      ) {
+
+        if (select.options.length) {
+
+          select.selectedIndex = 0;
+
+        }
+
+      }
+
+
+      document
+        .getElementById(
+          "statusLeagues"
+        )
+        .textContent =
+        leagues.length;
+
+
+      console.log(
+        "CAMPEONATOS CARREGADOS:",
+        leagues
+      );
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "Erro ao carregar campeonatos:",
+        error
+      );
+
+
+      /*
+        Fallback automático
+      */
+
+      leagues = [
+        ...fallbackLeagues
+      ];
+
+      select.innerHTML = "";
+
+      leagues.forEach(
+        league => {
+
+          const option =
+            document.createElement(
+              "option"
+            );
+
+          option.value =
+            league.name;
+
+          option.textContent =
+            league.name;
+
+          if (
+            league.name === "Brasil"
+          ) {
+
+            option.selected = true;
+
+          }
+
+          select.appendChild(
+            option
+          );
+
+        }
+      );
+
+
+      document
+        .getElementById(
+          "statusLeagues"
+        )
+        .textContent =
+        leagues.length;
+
+    }
+
+  }
+
+
+  /* =========================================================
+     ANALISAR JOGOS
+  ========================================================= */
+
+  async function runAnalysis() {
+
+    const league =
+      document
+        .getElementById(
+          "leagueSelect"
+        )
+        .value;
+
+    const days =
+      document
+        .getElementById(
+          "daysSelect"
+        )
+        .value;
+
+    const button =
+      document
+        .getElementById(
+          "analyzeBtn"
+        );
+
+    const results =
+      document
+        .getElementById(
+          "results"
+        );
+
+
+    /*
+      Validação
+    */
+
+    if (!league) {
+
+      results.innerHTML = `
+        <div class="empty">
+          ⚠️ Selecione um campeonato antes de analisar.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    /*
+      Loading
+    */
+
+    button.disabled = true;
+
+    button.textContent =
+      "⏳ ANALISANDO...";
+
+    results.innerHTML = `
+      <div class="loading">
+
+        <div class="spinner"></div>
+
+        Buscando jogos e estatísticas...
+
+      </div>
+    `;
+
+
+    document
+      .getElementById(
+        "gameCount"
+      )
+      .textContent =
+      "Buscando...";
+
+
+    try {
+
+      const url =
+        `/api/analyze?league=${encodeURIComponent(
+          league
+        )}&days=${encodeURIComponent(
+          days
+        )}`;
+
+
+      console.log(
+        "BUSCANDO:",
+        url
+      );
+
+
+      const response =
+        await fetch(
+          url,
+          {
+            method: "GET",
+            cache: "no-store"
+          }
+        );
+
+
+      console.log(
+        "STATUS:",
+        response.status
+      );
+
+
+      const text =
+        await response.text();
+
+
+      console.log(
+        "RESPOSTA /api/analyze:",
+        text.substring(
+          0,
+          1000
+        )
+      );
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          `Erro HTTP ${response.status}`
+        );
+
+      }
+
+
+      let data;
+
+      try {
+
+        data =
+          JSON.parse(text);
+
+      }
+
+      catch (e) {
+
+        throw new Error(
+          "Servidor retornou resposta inválida."
+        );
+
+      }
+
+
+      /*
+        O backend Marques Pro
+        retorna "games".
+      */
+
+      if (
+        Array.isArray(
+          data.games
+        )
+      ) {
+
+        games =
+          data.games;
+
+      }
+
+      else if (
+        Array.isArray(
+          data.fixtures
+        )
+      ) {
+
+        /*
+          Compatibilidade
+          com versões antigas.
+        */
+
+        games =
+          data.fixtures;
+
+      }
+
+      else if (
+        Array.isArray(
+          data.data
+        )
+      ) {
+
+        games =
+          data.data;
+
+      }
+
+      else {
+
+        games = [];
+
+      }
+
+
+      console.log(
+        "JOGOS RECEBIDOS:",
+        games
+      );
+
+
+      document
+        .getElementById(
+          "gameCount"
+        )
+        .textContent =
+        `${games.length} jogo${games.length !== 1 ? "s" : ""}`;
+
+
+      renderGames();
+
+
+      if (!games.length) {
+
+        results.innerHTML = `
+          <div class="empty">
+
+            😕 Nenhum jogo encontrado para
+            <strong>${escapeHtml(
+              league
+            )}</strong>
+            no período selecionado.
+
+            <br><br>
+
+            Tente aumentar o período para
+            <strong>3 ou 7 dias</strong>.
+
+          </div>
+        `;
+
+      }
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "ERRO NA ANÁLISE:",
+        error
+      );
+
+
+      games = [];
+
+
+      document
+        .getElementById(
+          "gameCount"
+        )
+        .textContent =
+        "Erro";
+
+
+      results.innerHTML = `
+        <div class="empty">
+
+          ❌ Não foi possível buscar os jogos.
+
+          <br><br>
+
+          <small>
+            ${escapeHtml(
+              error.message ||
+              "Erro desconhecido"
+            )}
+          </small>
+
+          <br><br>
+
+          Verifique se o backend do
+          <strong>Marques Pro</strong>
+          está online no Render.
+
+        </div>
+      `;
+
+    }
+
+    finally {
+
+      button.disabled = false;
+
+      button.textContent =
+        "🔎 ANALISAR JOGOS";
+
+    }
+
+  }
+
+
+  /* =========================================================
+     RENDERIZAR JOGOS
+  ========================================================= */
+
+  function renderGames() {
+
+    const container =
+      document.getElementById(
+        "results"
+      );
+
+    const search =
+      (
+        document
+          .getElementById(
+            "teamSearch"
+          )
+          .value || ""
+      )
+        .toLowerCase()
+        .trim();
+
+
+    let filtered =
+      games.filter(
+        game => {
+
+          const fixture =
+            game.fixture ||
+            {};
+
+          const teams =
+            fixture.teams ||
+            {};
+
+          const home =
+            teams.home ||
+            {};
+
+          const away =
+            teams.away ||
+            {};
+
+          const text =
+            `${home.name || ""} ${away.name || ""}`
+              .toLowerCase();
+
+          return text.includes(
+            search
+          );
+
+        }
+      );
+
+
+    /*
+      Filtra mercado
+    */
+
+    if (
+      currentMarket !== "all"
+    ) {
+
+      filtered =
+        filtered.filter(
+          game => {
+
+            const model =
+              game.model ||
+              game.prediction ||
+              {};
+
+            const markets =
+              model.markets ||
+              {};
+
+            return Boolean(
+              markets[
+                currentMarket
+              ]
+            );
+
+          }
+        );
+
+    }
+
+
+    if (!filtered.length) {
+
+      container.innerHTML = `
+        <div class="empty">
+          Nenhum jogo corresponde aos filtros atuais.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    container.innerHTML =
+      filtered
+        .map(
+          game =>
+            renderGame(
+              game
+            )
+        )
+        .join("");
+
+  }
+
+
+  /* =========================================================
+     RENDERIZAR CARD DO JOGO
+  ========================================================= */
+
+  function renderGame(game) {
+
+    const fixture =
+      game.fixture ||
+      {};
+
+    const teams =
+      fixture.teams ||
+      {};
+
+    const home =
+      teams.home ||
+      {};
+
+    const away =
+      teams.away ||
+      {};
+
+    const model =
+      game.model ||
+      game.prediction ||
+      {};
+
+    const metrics =
+      model.expected ||
+      model.expected_stats ||
+      {};
+
+
+    const goals =
+      Number(
+        metrics.goals ??
+        metrics.expected_goals ??
+        model.expected_goals ??
+        0
+      );
+
+
+    const corners =
+      Number(
+        metrics.corners ??
+        model.expected_corners ??
+        0
+      );
+
+
+    const cards =
+      Number(
+        metrics.cards ??
+        model.expected_cards ??
+        0
+      );
+
+
+    const shots =
+      Number(
+        metrics.shots ??
+        model.expected_shots ??
+        0
+      );
+
+
+    const sot =
+      Number(
+        metrics.sot ??
+        metrics.shots_on_target ??
+        model.expected_sot ??
+        model.expected_shots_on_target ??
+        0
+      );
+
+
+    const probabilities =
+      model.result_probabilities ||
+      model.probabilities ||
+      {};
+
+
+    const homeProb =
+      probability(
+        probabilities.home ??
+        probabilities.home_win ??
+        probabilities["1"]
+      );
+
+
+    const drawProb =
+      probability(
+        probabilities.draw ??
+        probabilities["X"]
+      );
+
+
+    const awayProb =
+      probability(
+        probabilities.away ??
+        probabilities.away_win ??
+        probabilities["2"]
+      );
+
+
+    const confidence =
+      model.confidence ??
+      model.confidence_score ??
+      "--";
+
+
+    const league =
+      fixture.league ||
+      fixture.competition ||
+      {};
+
+
+    const date =
+      fixture.date ||
+      fixture.start_time ||
+      fixture.datetime ||
+      "";
+
+
+    const exactScores =
+      model.exact_scores ||
+      model.exact_score_predictions ||
+      [];
+
+
+    const markets =
+      model.markets ||
+      {};
+
+
+    const squad =
+      game.squad ||
+      {};
+
+
+    const props =
+      buildProps(
+        markets
+      );
+
+
+    return `
+
+      <article class="game-card">
+
+        <div class="game-head">
+
+          <div>
+
+            <div class="league">
+              ${escapeHtml(
+                league.name ||
+                league ||
+                ""
+              )}
+            </div>
+
+            <div class="date">
+              ${formatDate(
+                date
+              )}
+            </div>
+
+          </div>
+
+          <div class="confidence">
+            ${formatConfidence(
+              confidence
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="teams">
+
+          <div class="team">
+            ${escapeHtml(
+              home.name ||
+              "Mandante"
+            )}
+          </div>
+
+          <div class="vs">
+            VS
+          </div>
+
+          <div class="team">
+            ${escapeHtml(
+              away.name ||
+              "Visitante"
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="metrics">
+
+          ${metric(
+            goals,
+            "Gols"
+          )}
+
+          ${metric(
+            corners,
+            "Esc."
+          )}
+
+          ${metric(
+            cards,
+            "Cart."
+          )}
+
+          ${metric(
+            shots,
+            "Chutes"
+          )}
+
+          ${metric(
+            sot,
+            "No gol"
+          )}
+
+        </div>
+
+
+        <div class="probabilities">
+
+          <div class="prob">
+
+            <strong>
+              ${formatPercent(
+                homeProb
+              )}
+            </strong>
+
+            <small>
+              ${escapeHtml(
+                home.name ||
+                "Casa"
+              )}
+            </small>
+
+          </div>
+
+          <div class="prob">
+
+            <strong>
+              ${formatPercent(
+                drawProb
+              )}
+            </strong>
+
+            <small>
+              Empate
+            </small>
+
+          </div>
+
+          <div class="prob">
+
+            <strong>
+              ${formatPercent(
+                awayProb
+              )}
+            </strong>
+
+            <small>
+              ${escapeHtml(
+                away.name ||
+                "Fora"
+              )}
+            </small>
+
+          </div>
+
+        </div>
+
+
+        <div class="props">
+
+          <div class="props-title">
+            🎯 Melhores Props
+          </div>
+
+          ${
+            props ||
+            `
+              <div class="empty">
+                Sem mercados disponíveis.
+              </div>
+            `
+          }
+
+        </div>
+
+
+        ${
+          exactScores.length
+            ? `
+
+              <div class="props">
+
+                <div class="props-title">
+                  🎲 Placares prováveis
+                </div>
+
+                <div class="exact-scores">
+
+                  ${
+                    exactScores
+                      .slice(
+                        0,
+                        6
+                      )
+                      .map(
+                        score => {
+
+                          const value =
+                            score.score ||
+                            score.result ||
+                            score.name ||
+                            "--";
+
+                          const prob =
+                            score.probability ??
+                            score.prob ??
+                            "";
+
+                          return `
+
+                            <div class="score">
+
+                              <strong>
+                                ${escapeHtml(
+                                  value
+                                )}
+                              </strong>
+
+                              <small>
+                                ${
+                                  prob !== ""
+                                    ? formatPercent(
+                                        prob
+                                      )
+                                    : ""
+                                }
+                              </small>
+
+                            </div>
+
+                          `;
+
+                        }
+                      )
+                      .join("")
+
+                  }
+
+                </div>
+
+              </div>
+
+            `
+            : ""
+        }
+
+
+        ${
+          game.real_odds &&
+          Object.keys(
+            game.real_odds
+          ).length
+            ? renderRealOdds(
+                game.real_odds
+              )
+            : ""
+        }
+
+
+        <details class="details">
+
+          <summary>
+            👥 Escalações e desfalques
+          </summary>
+
+          <div class="details-content">
+
+            ${renderLineups(
+              squad
+            )}
+
+            ${renderInjuries(
+              squad
+            )}
+
+          </div>
+
+        </details>
+
+      </article>
+
+    `;
+
+  }
+
+
+  /* =========================================================
+     PROPS
+  ========================================================= */
+
+  function buildProps(
+    markets
+  ) {
+
+    if (
+      !markets ||
+      typeof markets !== "object"
+    ) {
+
+      return "";
+
+    }
+
+
+    const items = [];
+
+
+    const labels = {
+
+      result:
+        "Resultado",
+
+      double_chance:
+        "Dupla chance",
+
+      goals:
+        "Gols",
+
+      btts:
+        "Ambas marcam",
+
+      corners:
+        "Escanteios",
+
+      cards:
+        "Cartões",
+
+      shots:
+        "Chutes",
+
+      shots_on_target:
+        "Chutes no gol"
+
+    };
+
+
+    Object.entries(
+      markets
+    ).forEach(
+      ([key, market]) => {
+
+        if (
+          !market
+        ) {
+          return;
+        }
+
+
+        /*
+          Mercado pode ser
+          objeto ou lista.
+        */
+
+        const values =
+          Array.isArray(
+            market
+          )
+            ? market
+            : [market];
+
+
+        values
+          .slice(
+            0,
+            4
+          )
+          .forEach(
+            item => {
+
+              if (
+                !item ||
+                typeof item !== "object"
+              ) {
+                return;
+              }
+
+
+              const name =
+                item.name ||
+                item.label ||
+                item.selection ||
+                item.outcome ||
+                labels[key] ||
+                key;
+
+
+              const prob =
+                item.probability ??
+                item.prob ??
+                item.p;
+
+
+              const odd =
+                item.fair_odd ??
+                item.fair_odds ??
+                item.odd ??
+                item.odds;
+
+
+              const edge =
+                item.edge ??
+                item.value;
+
+
+              items.push(`
+
+                <div class="prop">
+
+                  <div>
+
+                    <div class="prop-name">
+                      ${escapeHtml(
+                        name
+                      )}
+                    </div>
+
+                    <div class="prop-meta">
+                      ${escapeHtml(
+                        labels[key] ||
+                        key
+                      )}
+                    </div>
+
+                  </div>
+
+                  <div class="prop-right">
+
+                    ${
+                      prob !== undefined
+                        ? `
+                          <div class="prop-prob">
+                            ${formatPercent(
+                              prob
+                            )}
+                          </div>
+                        `
+                        : ""
+                    }
+
+                    ${
+                      odd !== undefined
+                        ? `
+                          <div class="prop-odd">
+                            Odd justa:
+                            ${formatOdd(
+                              odd
+                            )}
+                          </div>
+                        `
+                        : ""
+                    }
+
+                    ${
+                      edge !== undefined
+                        ? `
+                          <div class="value">
+                            Valor:
+                            ${formatPercent(
+                              edge
+                            )}
+                          </div>
+                        `
+                        : ""
+                    }
+
+                  </div>
+
+                </div>
+
+              `);
+
+            }
+
+          );
+
+      }
+
+    );
+
+
+    return items
+      .slice(
+        0,
+        12
+      )
+      .join("");
+
+  }
+
+
+  /* =========================================================
+     ESCALAÇÕES
+  ========================================================= */
+
+  function renderLineups(
+    squad
+  ) {
+
+    const lineups =
+      squad?.lineups ||
+      {};
+
+    const teams =
+      squad?.teams ||
+      {};
+
+
+    if (
+      Array.isArray(
+        lineups
+      ) &&
+      lineups.length
+    ) {
+
+      return lineups
+        .map(
+          lineup =>
+            lineupHtml(
+              lineup
+            )
+        )
+        .join("");
+
+    }
+
+
+    const teamEntries =
+      Object.values(
+        lineups
+      );
+
+
+    if (
+      teamEntries.length
+    ) {
+
+      return teamEntries
+        .map(
+          lineup =>
+            lineupHtml(
+              lineup
+            )
+        )
+        .join("");
+
+    }
+
+
+    return `
+
+      <div class="empty">
+        Escalações oficiais ainda não disponíveis.
+      </div>
+
+    `;
+
+  }
+
+
+  function lineupHtml(
+    lineup
+  ) {
+
+    const teamName =
+      lineup?.team?.name ||
+      lineup?.name ||
+      "Equipe";
+
+
+    const players =
+      lineup?.startXI ||
+      lineup?.startingXI ||
+      lineup?.players ||
+      [];
+
+
+    if (
+      !players.length
+    ) {
+
+      return "";
+
+    }
+
+
+    return `
+
+      <div class="lineup-team">
+
+        <h4>
+          ${escapeHtml(
+            teamName
+          )}
+        </h4>
+
+        <div class="players">
+
+          ${
+            players
+              .map(
+                item => {
+
+                  const player =
+                    item.player ||
+                    item;
+
+                  return `
+
+                    <span class="player">
+                      ${escapeHtml(
+                        player.name ||
+                        "Jogador"
+                      )}
+                    </span>
+
+                  `;
+
+                }
+              )
+              .join("")
+          }
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* =========================================================
+     DESFALQUES
+  ========================================================= */
+
+  function renderInjuries(
+    squad
+  ) {
+
+    const injuries =
+      squad?.injuries ||
+      [];
+
+
+    if (
+      !Array.isArray(
+        injuries
+      ) ||
+      !injuries.length
+    ) {
+
+      return `
+
+        <div style="
+          margin-top:10px;
+          color:#71869e;
+          font-size:10px;
+        ">
+          Nenhum desfalque informado pela fonte.
+        </div>
+
+      `;
+
+    }
+
+
+    return `
+
+      <div style="
+        margin-top:14px;
+        margin-bottom:7px;
+        font-size:11px;
+        font-weight:900;
+      ">
+        🚑 Desfalques
+      </div>
+
+      ${
+        injuries
+          .slice(
+            0,
+            20
+          )
+          .map(
+            injury => {
+
+              const player =
+                injury.player ||
+                {};
+
+              const team =
+                injury.team ||
+                {};
+
+              return `
+
+                <div class="injury">
+
+                  <span class="injury-name">
+
+                    ${escapeHtml(
+                      player.name ||
+                      injury.name ||
+                      "Jogador"
+                    )}
+
+                    ${
+                      team.name
+                        ? `
+                          · ${escapeHtml(
+                              team.name
+                            )}
+                        `
+                        : ""
+                    }
+
+                  </span>
+
+                  <span class="injury-status">
+                    ${escapeHtml(
+                      injury.type ||
+                      injury.reason ||
+                      injury.status ||
+                      "Indisponível"
+                    )}
+                  </span>
+
+                </div>
+
+              `;
+
+            }
+          )
+          .join("")
+      }
+
+    `;
+
+  }
+
+
+  /* =========================================================
+     ODDS REAIS
+  ========================================================= */
+
+  function renderRealOdds(
+    odds
+  ) {
+
+    if (
+      !odds ||
+      typeof odds !== "object"
+    ) {
+
+      return "";
+
+    }
+
+
+    const values = [];
+
+
+    Object.entries(
+      odds
+    )
+      .slice(
+        0,
+        8
+      )
+      .forEach(
+        ([key, value]) => {
+
+          if (
+            typeof value === "object"
+          ) {
+
+            Object.entries(
+              value
+            )
+              .slice(
+                0,
+                5
+              )
+              .forEach(
+                ([name, odd]) => {
+
+                  if (
+                    typeof odd === "number"
+                  ) {
+
+                    values.push(
+                      `${name}: ${odd.toFixed(2)}`
+                    );
+
+                  }
+
+                }
+              );
+
+          }
+
+          else if (
+            typeof value === "number"
+          ) {
+
+            values.push(
+              `${key}: ${value.toFixed(2)}`
+            );
+
+          }
+
+        }
+      );
+
+
+    if (
+      !values.length
+    ) {
+
+      return "";
+
+    }
+
+
+    return `
+
+      <div class="props">
+
+        <div class="real-odds">
+
+          💰 Odds reais encontradas:
+          ${escapeHtml(
+            values.join(
+              " · "
+            )
+          )}
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* =========================================================
+     MÉTRICAS
+  ========================================================= */
+
+  function metric(
+    value,
+    label
+  ) {
+
+    return `
+
+      <div class="metric">
+
+        <b>
+          ${formatNumber(
+            value
+          )}
+        </b>
+
+        <span>
+          ${label}
+        </span>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* =========================================================
+     FORMATAÇÕES
+  ========================================================= */
+
+  function probability(
+    value
+  ) {
+
+    if (
+      value === undefined ||
+      value === null ||
+      value === ""
+    ) {
+
+      return 0;
+
+    }
+
+
+    let number =
+      Number(
+        value
+      );
+
+
+    if (
+      !Number.isFinite(
+        number
+      )
+    ) {
+
+      return 0;
+
+    }
+
+
+    /*
+      Aceita tanto:
+      0.55
+      quanto
+      55
+    */
+
+    if (
+      number > 1
+    ) {
+
+      number =
+        number / 100;
+
+    }
+
+
+    return number;
+
+  }
+
+
+  function formatPercent(
+    value
+  ) {
+
+    const p =
+      probability(
+        value
+      );
+
+
+    return `${(
+      p * 100
+    ).toFixed(1)}%`;
+
+  }
+
+
+  function formatOdd(
+    value
+  ) {
+
+    const number =
+      Number(
+        value
+      );
+
+
+    if (
+      !Number.isFinite(
+        number
+      )
+    ) {
+
+      return "--";
+
+    }
+
+
+    return number.toFixed(
+      2
+    );
+
+  }
+
+
+  function formatNumber(
+    value
+  ) {
+
+    const number =
+      Number(
+        value
+      );
+
+
+    if (
+      !Number.isFinite(
+        number
+      )
+    ) {
+
+      return "--";
+
+    }
+
+
+    return number.toFixed(
+      1
+    );
+
+  }
+
+
+  function formatConfidence(
+    value
+  ) {
+
+    if (
+      value === undefined ||
+      value === null ||
+      value === ""
+    ) {
+
+      return "--";
+
+    }
+
+
+    if (
+      typeof value === "number"
+    ) {
+
+      if (
+        value <= 1
+      ) {
+
+        return `${(
+          value * 100
+        ).toFixed(0)}%`;
+
+      }
+
+      return `${value.toFixed(0)}%`;
+
+    }
+
+
+    return escapeHtml(
+      String(
+        value
+      )
+    );
+
+  }
+
+
+  function formatDate(
+    value
+  ) {
+
+    if (!value) {
+      return "Data não informada";
+    }
+
+
+    const date =
+      new Date(
+        value
+      );
+
+
+    if (
+      Number.isNaN(
+        date.getTime()
+      )
+    ) {
+
+      return escapeHtml(
+        String(
+          value
+        )
+      );
+
+    }
+
+
+    return date.toLocaleString(
+      "pt-BR",
+      {
+        day: "2-digit",
+        month: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit"
+      }
+    );
+
+  }
+
+
+  function escapeHtml(
+    value
+  ) {
+
+    return String(
+      value ?? ""
+    )
+      .replaceAll(
+        "&",
+        "&amp;"
+      )
+      .replaceAll(
+        "<",
+        "&lt;"
+      )
+      .replaceAll(
+        ">",
+        "&gt;"
+      )
+      .replaceAll(
+        '"',
+        "&quot;"
+      )
+      .replaceAll(
+        "'",
+        "&#039;"
+      );
+
+  }
+
+
+  /* =========================================================
+     ABAS
+  ========================================================= */
+
+  document
+    .querySelectorAll(
+      ".tab"
+    )
+    .forEach(
+      tab => {
+
+        tab.addEventListener(
+          "click",
+          () => {
+
+            document
+              .querySelectorAll(
+                ".tab"
+              )
+              .forEach(
+                item =>
+                  item.classList.remove(
+                    "active"
+                  )
+              );
+
+
+            tab.classList.add(
+              "active"
+            );
+
+
+            currentMarket =
+              tab.dataset.market ||
+              "all";
+
+
+            renderGames();
+
+          }
+        );
+
+      }
+    );
+
+
+  /* =========================================================
+     NAVEGAÇÃO INFERIOR
+  ========================================================= */
+
+  function showSection(
+    section,
+    button
+  ) {
+
+    document
+      .querySelectorAll(
+        ".nav-btn"
+      )
+      .forEach(
+        item =>
+          item.classList.remove(
+            "active"
+          )
+      );
+
+
+    if (button) {
+
+      button.classList.add(
+        "active"
+      );
+
+    }
+
+
+    const statusPanel =
+      document.getElementById(
+        "statusPanel"
+      );
+
+
+    if (
+      section === "status"
+    ) {
+
+      statusPanel.style.display =
+        "block";
+
+      window.scrollTo(
+        {
+          top:
+            document.body.scrollHeight,
+          behavior:
+            "smooth"
+        }
+      );
+
+      loadHealth();
+
+      return;
+
+    }
+
+
+    statusPanel.style.display =
+      "none";
+
+
+    if (
+      section === "props"
+    ) {
+
+      currentMarket =
+        currentMarket === "all"
+          ? "goals"
+          : currentMarket;
+
+      renderGames();
+
+    }
+
+  }
+
+
+  /* =========================================================
+     STATUS / HEALTH
+  ========================================================= */
+
+  async function loadHealth() {
+
+    try {
+
+      const response =
+        await fetch(
+          "/api/health",
+          {
+            cache: "no-store"
+          }
+        );
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          "HTTP " +
+          response.status
+        );
+
+      }
+
+
+      const data =
+        await response.json();
+
+
+      console.log(
+        "HEALTH:",
+        data
+      );
+
+
+      const apiFootball =
+        document.getElementById(
+          "statusApiFootball"
+        );
+
+
+      const odds =
+        document.getElementById(
+          "statusOdds"
+        );
+
+
+      const cache =
+        document.getElementById(
+          "statusCache"
+        );
+
+
+      if (apiFootball) {
+
+        apiFootball.textContent =
+          data.api_football
+            ? "ATIVA"
+            : "INATIVA";
+
+        apiFootball.className =
+          data.api_football
+            ? "green"
+            : "red";
+
+      }
+
+
+      if (odds) {
+
+        odds.textContent =
+          data.odds_api
+            ? "ATIVA"
+            : "INATIVA";
+
+        odds.className =
+          data.odds_api
+            ? "green"
+            : "yellow";
+
+      }
+
+
+      if (cache) {
+
+        cache.textContent =
+          data.cache_ttl
+            ? `${data.cache_ttl}s`
+            : "--";
+
+      }
+
+
+      document
+        .getElementById(
+          "connectionStatus"
+        )
+        .textContent =
+        "● ONLINE";
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "Erro health:",
+        error
+      );
+
+
+      document
+        .getElementById(
+          "connectionStatus"
+        )
+        .textContent =
+        "● OFFLINE";
+
+    }
+
+  }
+
+
+  /* =========================================================
+     INICIALIZAÇÃO
+  ========================================================= */
+
+  async function init() {
+
+    console.log(
+      "Marques Pro iniciando..."
+    );
+
+
+    await loadLeagues();
+
+
+    await loadHealth();
+
+
+    console.log(
+      "Marques Pro pronto."
+    );
+
+  }
+
+
+  init();
+
+</script>
+
+</body>
+</html>
