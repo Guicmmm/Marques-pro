@@ -1,0 +1,3642 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#050a12">
+<title>Marques Pro</title>
+
+<style>
+:root{
+  --bg:#050912;
+  --bg2:#08111d;
+  --card:#0b1421;
+  --card2:#101c2b;
+  --card3:#132238;
+  --line:#1b2b40;
+  --line2:#28415e;
+  --text:#f5f8fc;
+  --muted:#8093aa;
+  --blue:#1683ff;
+  --blue2:#5bb2ff;
+  --green:#35d07f;
+  --yellow:#f5c542;
+  --orange:#ff9b4a;
+  --red:#ff6262;
+  --purple:#9d7cff;
+}
+
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 50% -12%,#12365e 0,#07111e 30%,#050912 65%);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.app{
+  width:100%;
+  max-width:1180px;
+  margin:auto;
+  padding-bottom:100px;
+}
+
+/* =====================================
+   HEADER
+===================================== */
+
+.header{
+  padding:18px 16px 13px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.logo{
+  width:45px;
+  height:45px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    linear-gradient(145deg,#1683ff,#56b0ff);
+  box-shadow:
+    0 8px 28px #1683ff35,
+    inset 0 1px #ffffff50;
+  font-size:23px;
+}
+
+.brand h1{
+  margin:0;
+  font-size:20px;
+  font-weight:900;
+  letter-spacing:.5px;
+}
+
+.brand small{
+  display:block;
+  margin-top:2px;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.connection{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:7px 10px;
+  border-radius:20px;
+  background:#0c1928;
+  border:1px solid var(--line);
+  color:#9eb1c7;
+  font-size:9px;
+  font-weight:800;
+}
+
+.status-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 12px #35d07f;
+}
+
+.status-dot.off{
+  background:var(--red);
+  box-shadow:0 0 10px #ff6262;
+}
+
+/* =====================================
+   HERO
+===================================== */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  margin:0 14px 14px;
+  padding:21px;
+  border:1px solid #20476e;
+  border-radius:22px;
+  background:
+    linear-gradient(135deg,#0c2947,#0a1727 58%,#09121e);
+  box-shadow:0 12px 40px #00000020;
+}
+
+.hero:before{
+  content:"";
+  position:absolute;
+  width:250px;
+  height:250px;
+  right:-100px;
+  top:-120px;
+  border-radius:50%;
+  background:#1683ff18;
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  width:130px;
+  height:130px;
+  right:100px;
+  bottom:-90px;
+  border-radius:50%;
+  background:#1683ff0c;
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+}
+
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 9px;
+  border-radius:20px;
+  background:#1683ff15;
+  border:1px solid #2b6192;
+  color:#83c4ff;
+  font-size:9px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+
+.hero-title{
+  margin-top:12px;
+  font-size:26px;
+  line-height:1.1;
+  font-weight:900;
+  letter-spacing:-.5px;
+}
+
+.hero-sub{
+  margin-top:7px;
+  color:#9db1c7;
+  font-size:12px;
+  line-height:1.5;
+  max-width:620px;
+}
+
+.hero-stats{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:16px;
+}
+
+.hero-stat{
+  padding:8px 10px;
+  border-radius:10px;
+  background:#071525aa;
+  border:1px solid #284665;
+  color:#c1cfdd;
+  font-size:10px;
+  font-weight:700;
+}
+
+/* =====================================
+   CONTROLS
+===================================== */
+
+.controls{
+  margin:0 14px 15px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.field{
+  min-width:0;
+  padding:10px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:13px;
+}
+
+.field label{
+  display:block;
+  margin-bottom:5px;
+  color:var(--muted);
+  font-size:8px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+
+select,
+input{
+  width:100%;
+  color:white;
+  background:transparent;
+  border:0;
+  outline:0;
+  font-size:12px;
+}
+
+select option{
+  background:#0b1421;
+  color:white;
+}
+
+.analyze{
+  grid-column:1/-1;
+  padding:14px;
+  border:0;
+  border-radius:13px;
+  color:white;
+  background:
+    linear-gradient(135deg,#1683ff,#1262bd);
+  font-size:12px;
+  font-weight:900;
+  box-shadow:0 9px 25px #1683ff25;
+  transition:.15s;
+}
+
+.analyze:hover{
+  filter:brightness(1.08);
+}
+
+.analyze:active{
+  transform:scale(.985);
+}
+
+/* =====================================
+   API STATUS
+===================================== */
+
+.api-status{
+  margin:0 14px 15px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:7px;
+}
+
+.api-pill{
+  padding:9px 10px;
+  border-radius:11px;
+  background:#09131f;
+  border:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.api-pill span:first-child{
+  color:#8fa2b8;
+  font-size:9px;
+  font-weight:800;
+}
+
+.api-state{
+  font-size:9px;
+  font-weight:900;
+}
+
+.api-ok{
+  color:var(--green);
+}
+
+.api-off{
+  color:var(--yellow);
+}
+
+/* =====================================
+   SECTIONS
+===================================== */
+
+.section{
+  padding:0 14px;
+}
+
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin:20px 0 10px;
+}
+
+.section-title h2{
+  margin:0;
+  font-size:16px;
+  font-weight:900;
+}
+
+.section-title span{
+  color:var(--muted);
+  font-size:9px;
+  white-space:nowrap;
+}
+
+/* =====================================
+   FILTERS
+===================================== */
+
+.filters{
+  display:flex;
+  gap:6px;
+  overflow-x:auto;
+  padding-bottom:5px;
+  scrollbar-width:none;
+}
+
+.filters::-webkit-scrollbar{
+  display:none;
+}
+
+.filter{
+  flex:none;
+  padding:8px 11px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:var(--card);
+  color:#8fa2b8;
+  font-size:10px;
+  font-weight:800;
+}
+
+.filter.active{
+  background:var(--blue);
+  border-color:var(--blue);
+  color:white;
+}
+
+/* =====================================
+   FEATURED
+===================================== */
+
+.featured{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+}
+
+.prop{
+  position:relative;
+  overflow:hidden;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:
+    linear-gradient(145deg,#0d1b2c,#09131f);
+}
+
+.prop-value{
+  position:absolute;
+  top:0;
+  right:0;
+  padding:5px 8px;
+  border-bottom-left-radius:10px;
+  background:#35d07f18;
+  color:var(--green);
+  font-size:8px;
+  font-weight:900;
+}
+
+.prop-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.prop-icon{
+  font-size:17px;
+}
+
+.prop-score{
+  padding:4px 7px;
+  border-radius:20px;
+  background:#122b44;
+  color:#7ebdff;
+  font-size:9px;
+  font-weight:800;
+}
+
+.prop-game{
+  margin-top:9px;
+  color:#dbe5ef;
+  font-size:10px;
+  line-height:1.4;
+}
+
+.prop-name{
+  margin-top:7px;
+  font-size:11px;
+  font-weight:900;
+}
+
+.prop-info{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  margin-top:11px;
+}
+
+.probability{
+  color:var(--green);
+  font-size:19px;
+  font-weight:900;
+}
+
+.probability small{
+  display:block;
+  margin-top:1px;
+  color:var(--muted);
+  font-size:8px;
+  font-weight:500;
+}
+
+.fair{
+  text-align:right;
+  font-size:12px;
+  font-weight:900;
+}
+
+.fair small{
+  display:block;
+  color:var(--muted);
+  font-size:8px;
+  font-weight:500;
+}
+
+/* =====================================
+   GAME
+===================================== */
+
+.game{
+  margin-bottom:12px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:var(--card);
+  box-shadow:0 7px 25px #00000012;
+}
+
+.game-head{
+  padding:14px;
+  border-bottom:1px solid var(--line);
+  background:
+    linear-gradient(180deg,#0d1928,#0b1421);
+}
+
+.game-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.league{
+  color:#72b8ff;
+  font-size:9px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.game-date{
+  color:var(--muted);
+  font-size:9px;
+}
+
+.teams{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:10px;
+  margin-top:12px;
+}
+
+.team{
+  font-size:14px;
+  font-weight:900;
+  line-height:1.25;
+}
+
+.team:last-child{
+  text-align:right;
+}
+
+.vs{
+  width:31px;
+  height:31px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#101e2e;
+  border:1px solid #263b54;
+  color:#7890a9;
+  font-size:8px;
+  font-weight:900;
+}
+
+/* =====================================
+   EXACT SCORES
+===================================== */
+
+.exact-section{
+  padding:12px 12px 5px;
+}
+
+.sub-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:8px;
+}
+
+.sub-title strong{
+  font-size:10px;
+}
+
+.sub-title span{
+  color:var(--muted);
+  font-size:8px;
+}
+
+.exact-list{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:6px;
+}
+
+.exact{
+  padding:9px 6px;
+  text-align:center;
+  border:1px solid #23374e;
+  border-radius:10px;
+  background:#0d1928;
+}
+
+.exact-score{
+  color:white;
+  font-size:16px;
+  font-weight:900;
+}
+
+.exact-prob{
+  margin-top:2px;
+  color:#70b9ff;
+  font-size:9px;
+  font-weight:800;
+}
+
+/* =====================================
+   MODEL SUMMARY
+===================================== */
+
+.model-box{
+  margin:7px 12px 5px;
+  padding:10px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#09131f;
+}
+
+.model-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:8px;
+}
+
+.model-title strong{
+  font-size:10px;
+}
+
+.model-title span{
+  color:var(--purple);
+  font-size:8px;
+  font-weight:800;
+}
+
+.model-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:5px;
+}
+
+.model-stat{
+  padding:7px 3px;
+  border-radius:8px;
+  background:#0e1b2a;
+  text-align:center;
+}
+
+.model-stat strong{
+  display:block;
+  font-size:11px;
+}
+
+.model-stat small{
+  display:block;
+  margin-top:2px;
+  color:var(--muted);
+  font-size:7px;
+}
+
+/* =====================================
+   REAL ODDS
+===================================== */
+
+.odds-box{
+  margin:7px 12px 5px;
+  padding:10px;
+  border:1px solid #2a435e;
+  border-radius:12px;
+  background:
+    linear-gradient(145deg,#0c1b2b,#0a141f);
+}
+
+.odds-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:8px;
+}
+
+.odds-title strong{
+  font-size:10px;
+}
+
+.odds-title span{
+  color:var(--muted);
+  font-size:8px;
+}
+
+.real-odd-row{
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  align-items:center;
+  gap:8px;
+  padding:7px 0;
+  border-bottom:1px solid #17283a;
+}
+
+.real-odd-row:last-child{
+  border-bottom:0;
+}
+
+.real-market{
+  min-width:0;
+}
+
+.real-market strong{
+  display:block;
+  font-size:9px;
+}
+
+.real-market small{
+  display:block;
+  margin-top:2px;
+  color:var(--muted);
+  font-size:7px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.real-price{
+  color:white;
+  font-size:13px;
+  font-weight:900;
+}
+
+.value{
+  padding:4px 6px;
+  border-radius:7px;
+  font-size:7px;
+  font-weight:900;
+}
+
+.value-good{
+  background:#35d07f18;
+  color:var(--green);
+}
+
+.value-neutral{
+  background:#f5c54218;
+  color:var(--yellow);
+}
+
+.value-bad{
+  background:#ff626218;
+  color:var(--red);
+}
+
+/* =====================================
+   MARKETS
+===================================== */
+
+.markets{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:7px;
+  padding:7px 10px 12px;
+}
+
+.market{
+  position:relative;
+  min-width:0;
+  padding:10px;
+  border:1px solid #1a2c42;
+  border-radius:11px;
+  background:var(--card2);
+}
+
+.market.has-value{
+  border-color:#246043;
+}
+
+.market-name{
+  min-height:29px;
+  padding-right:25px;
+  font-size:10px;
+  font-weight:900;
+  line-height:1.35;
+}
+
+.market-percent{
+  margin-top:7px;
+  color:#69b7ff;
+  font-size:16px;
+  font-weight:900;
+}
+
+.market-bottom{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:center;
+  gap:4px;
+  margin-top:5px;
+  color:var(--muted);
+  font-size:8px;
+}
+
+.market-real{
+  color:var(--green);
+  font-weight:900;
+}
+
+.market-value{
+  display:inline-block;
+  margin-top:5px;
+  color:var(--green);
+  font-size:8px;
+  font-weight:900;
+}
+
+.add{
+  position:absolute;
+  top:8px;
+  right:8px;
+  width:23px;
+  height:23px;
+  border:1px solid #29445f;
+  border-radius:7px;
+  background:#14263b;
+  color:white;
+  font-size:14px;
+}
+
+.add.selected{
+  border-color:var(--green);
+  background:var(--green);
+  color:#03150b;
+}
+
+/* =====================================
+   RISK
+===================================== */
+
+.risk-low{
+  color:var(--green)!important;
+}
+
+.risk-mid{
+  color:var(--yellow)!important;
+}
+
+.risk-high{
+  color:var(--orange)!important;
+}
+
+.risk-vhigh{
+  color:var(--red)!important;
+}
+
+/* =====================================
+   RANKING
+===================================== */
+
+.rank{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin-bottom:7px;
+  padding:11px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--card);
+}
+
+.rank-number{
+  width:27px;
+  height:27px;
+  flex:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:8px;
+  background:#152940;
+  font-size:10px;
+  font-weight:900;
+}
+
+.rank-main{
+  flex:1;
+  min-width:0;
+}
+
+.rank-main strong{
+  display:block;
+  font-size:10px;
+}
+
+.rank-main small{
+  display:block;
+  margin-top:3px;
+  overflow:hidden;
+  color:var(--muted);
+  font-size:8px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.rank-prob{
+  color:var(--green);
+  font-size:12px;
+  font-weight:900;
+}
+
+.rank-odd{
+  color:#cbd8e5;
+  font-size:10px;
+  font-weight:800;
+}
+
+/* =====================================
+   COUPON
+===================================== */
+
+.coupon{
+  padding:15px;
+  border:1px solid #244462;
+  border-radius:18px;
+  background:
+    linear-gradient(145deg,#0c1b2c,#08111c);
+}
+
+.coupon-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-bottom:13px;
+  border-bottom:1px solid var(--line);
+}
+
+.coupon-title{
+  font-size:16px;
+  font-weight:900;
+}
+
+.coupon-sub{
+  margin-top:3px;
+  color:var(--muted);
+  font-size:8px;
+}
+
+.coupon-odd{
+  color:var(--green);
+  font-size:21px;
+  font-weight:900;
+}
+
+.coupon-item{
+  padding:12px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.coupon-item strong{
+  font-size:10px;
+}
+
+.coupon-game{
+  margin-top:4px;
+  color:var(--muted);
+  font-size:9px;
+}
+
+.coupon-details{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:5px;
+  margin-top:7px;
+  font-size:8px;
+}
+
+.coupon-real{
+  color:var(--green);
+  font-weight:900;
+}
+
+.coupon-warning{
+  margin-top:13px;
+  padding:9px;
+  border-radius:9px;
+  background:#f5c5420d;
+  border:1px solid #5b4d25;
+  color:#a99d72;
+  font-size:8px;
+  line-height:1.5;
+}
+
+/* =====================================
+   EMPTY / ERROR
+===================================== */
+
+.empty{
+  width:100%;
+  padding:32px 15px;
+  text-align:center;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:var(--card);
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.5;
+}
+
+.error{
+  color:#ff7777;
+}
+
+.success{
+  color:var(--green);
+  font-size:10px;
+}
+
+/* =====================================
+   BOTTOM NAV
+===================================== */
+
+.bottom{
+  position:fixed;
+  z-index:50;
+  left:0;
+  right:0;
+  bottom:0;
+  border-top:1px solid var(--line);
+  background:#07101cf5;
+  backdrop-filter:blur(18px);
+}
+
+.bottom-inner{
+  width:100%;
+  max-width:700px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+}
+
+.nav{
+  padding:9px 5px 10px;
+  border:0;
+  background:transparent;
+  color:#71849a;
+  font-size:9px;
+  font-weight:800;
+}
+
+.nav-icon{
+  display:block;
+  margin-bottom:3px;
+  font-size:18px;
+}
+
+.nav.active{
+  color:#63b1ff;
+}
+
+/* =====================================
+   DESKTOP
+===================================== */
+
+@media(min-width:800px){
+
+  .header{
+    padding-left:18px;
+    padding-right:18px;
+  }
+
+  .controls{
+    grid-template-columns:1.5fr .7fr .7fr .7fr;
+  }
+
+  .analyze{
+    grid-column:auto;
+  }
+
+  .api-status{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .featured{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .markets{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .exact-list{
+    grid-template-columns:repeat(6,1fr);
+  }
+
+  .model-grid{
+    grid-template-columns:repeat(5,1fr);
+  }
+}
+
+@media(max-width:600px){
+
+  .featured{
+    display:flex;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+
+  .featured::-webkit-scrollbar{
+    display:none;
+  }
+
+  .featured .prop{
+    min-width:205px;
+  }
+
+  .team{
+    font-size:12px;
+  }
+}
+
+/* =====================================
+   LOADING
+===================================== */
+
+.loading{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+}
+
+.spinner{
+  width:13px;
+  height:13px;
+  border:2px solid #ffffff35;
+  border-top-color:white;
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+
+  <div class="brand">
+
+    <div class="logo">⚡</div>
+
+    <div>
+      <h1>MARQUES PRO</h1>
+      <small>Football Props Intelligence</small>
+    </div>
+
+  </div>
+
+  <div class="connection">
+
+    <span id="statusDot" class="status-dot"></span>
+
+    <span id="connectionText">
+      Online
+    </span>
+
+  </div>
+
+</header>
+
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <div class="hero-badge">
+      ⚡ Inteligência para apostas
+    </div>
+
+    <div class="hero-title">
+      Encontre valor em cada jogo.
+    </div>
+
+    <div class="hero-sub">
+      Analise probabilidades, placares, gols, escanteios,
+      cartões, finalizações e odds reais em um único painel.
+    </div>
+
+    <div class="hero-stats">
+
+      <div class="hero-stat">⚽ Gols</div>
+      <div class="hero-stat">🚩 Escanteios</div>
+      <div class="hero-stat">🟨 Cartões</div>
+      <div class="hero-stat">🎯 Finalizações</div>
+      <div class="hero-stat">🥅 No gol</div>
+      <div class="hero-stat">🤝 BTTS</div>
+      <div class="hero-stat">🔮 Placares</div>
+      <div class="hero-stat">💰 Odds reais</div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="controls">
+
+  <div class="field">
+
+    <label>Campeonato</label>
+
+    <select id="league">
+
+      <option value="Brasil">
+        🇧🇷 Brasil
+      </option>
+
+      <option value="Inglaterra">
+        🇬🇧 Inglaterra
+      </option>
+
+      <option value="Espanha">
+        🇪🇸 Espanha
+      </option>
+
+      <option value="Itália">
+        🇮🇹 Itália
+      </option>
+
+      <option value="Alemanha">
+        🇩🇪 Alemanha
+      </option>
+
+      <option value="França">
+        🇫🇷 França
+      </option>
+
+    </select>
+
+  </div>
+
+
+  <div class="field">
+
+    <label>Período</label>
+
+    <select id="days">
+
+      <option value="1">Hoje</option>
+      <option value="2">2 dias</option>
+      <option value="3">3 dias</option>
+      <option value="7">7 dias</option>
+
+    </select>
+
+  </div>
+
+
+  <div class="field">
+
+    <label>Odd alvo</label>
+
+    <input
+      id="target"
+      type="number"
+      value="10"
+      min="1"
+      step="1"
+    >
+
+  </div>
+
+
+  <div class="field">
+
+    <label>Máx. props</label>
+
+    <input
+      id="maxSelections"
+      type="number"
+      value="8"
+      min="1"
+      max="20"
+    >
+
+  </div>
+
+
+  <button class="analyze" onclick="run()">
+    🔎 ANALISAR JOGOS E ENCONTRAR VALOR
+  </button>
+
+</section>
+
+
+<section class="api-status">
+
+  <div class="api-pill">
+
+    <span>API-Football</span>
+
+    <span
+      id="afState"
+      class="api-state api-off"
+    >
+      verificando...
+    </span>
+
+  </div>
+
+
+  <div class="api-pill">
+
+    <span>Odds externas</span>
+
+    <span
+      id="oddsState"
+      class="api-state api-off"
+    >
+      verificando...
+    </span>
+
+  </div>
+
+</section>
+
+
+<section class="section">
+
+  <div class="section-title">
+
+    <h2>🔥 Melhores Props</h2>
+
+    <span id="featuredCount">
+      0 oportunidades
+    </span>
+
+  </div>
+
+  <div id="featured" class="featured">
+
+    <div
+      class="empty"
+      style="width:100%"
+    >
+      Faça uma análise para encontrar
+      as melhores oportunidades.
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="section">
+
+  <div class="section-title">
+
+    <h2>Mercados</h2>
+
+    <span>
+      filtre as oportunidades
+    </span>
+
+  </div>
+
+
+  <div class="filters">
+
+    <button
+      class="filter active"
+      onclick="filterMarket('all',this)"
+    >
+      Todos
+    </button>
+
+    <button
+      class="filter"
+      onclick="filterMarket('goals',this)"
+    >
+      ⚽ Gols
+    </button>
+
+    <button
+      class="filter"
+      onclick="filterMarket('btts',this)"
+    >
+      🤝 BTTS
+    </button>
+
+    <button
+      class="filter"
+      onclick="filterMarket('corners',this)"
+    >
+      🚩 Escanteios
+    </button>
+
+    <button
+      class="filter"
+      onclick="filterMarket('cards',this)"
+    >
+      🟨 Cartões
+    </button>
+
+    <button
+      class="filter"
+      onclick="filterMarket('shots',this)"
+    >
+      🎯 Finalizações
+    </button>
+
+    <button
+      class="filter"
+      onclick="filterMarket('shots_on_target',this)"
+    >
+      🥅 No gol
+    </button>
+
+    <button
+      class="filter"
+      onclick="filterMarket('double_chance',this)"
+    >
+      🛡️ Dupla chance
+    </button>
+
+    <button
+      class="filter"
+      onclick="filterMarket('result',this)"
+    >
+      🏆 Resultado
+    </button>
+
+  </div>
+
+</section>
+
+
+<section class="section">
+
+  <div
+    id="status"
+    class="empty"
+    style="padding:13px"
+  >
+    Pronto para analisar os jogos.
+  </div>
+
+</section>
+
+
+<section
+  id="gamesSection"
+  class="section"
+>
+
+  <div class="section-title">
+
+    <h2>⚽ Jogos analisados</h2>
+
+    <span id="gamesCount">
+      0 jogos
+    </span>
+
+  </div>
+
+  <div id="gamesBox">
+
+    <div class="empty">
+      Nenhum jogo analisado ainda.
+    </div>
+
+  </div>
+
+</section>
+
+
+<section
+  id="rankingSection"
+  class="section"
+  style="display:none"
+>
+
+  <div class="section-title">
+
+    <h2>🏆 Ranking de Props</h2>
+
+    <span>
+      maior score primeiro
+    </span>
+
+  </div>
+
+  <div id="rankingBox"></div>
+
+</section>
+
+
+<section
+  id="couponSection"
+  class="section"
+  style="display:none"
+>
+
+  <div class="section-title">
+
+    <h2>🎟️ Meu Cupom</h2>
+
+    <span id="couponCount">
+      0 seleções
+    </span>
+
+  </div>
+
+  <div id="couponBox"></div>
+
+</section>
+
+</div>
+
+
+<nav class="bottom">
+
+  <div class="bottom-inner">
+
+    <button
+      class="nav active"
+      onclick="showSection('games',this)"
+    >
+      <span class="nav-icon">⚽</span>
+      Jogos
+    </button>
+
+    <button
+      class="nav"
+      onclick="showSection('featured',this)"
+    >
+      <span class="nav-icon">🔥</span>
+      Props
+    </button>
+
+    <button
+      class="nav"
+      onclick="showSection('ranking',this)"
+    >
+      <span class="nav-icon">🏆</span>
+      Ranking
+    </button>
+
+    <button
+      class="nav"
+      onclick="showSection('coupon',this)"
+    >
+      <span class="nav-icon">🎟️</span>
+      Cupom
+    </button>
+
+  </div>
+
+</nav>
+
+
+<script>
+
+let allGames = [];
+let allMarkets = [];
+let selectedMarkets = [];
+let currentFilter = "all";
+
+
+/* =====================================
+   UTILIDADES
+===================================== */
+
+function esc(v){
+
+  return String(v ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+function pct(v){
+
+  const n = Number(v);
+
+  return Number.isFinite(n)
+    ? n
+    : 0;
+
+}
+
+
+function odd(v){
+
+  const n = Number(v);
+
+  return Number.isFinite(n) && n > 0
+    ? n
+    : 0;
+
+}
+
+
+function formatDate(date){
+
+  if(!date)
+    return "";
+
+  try{
+
+    return new Date(date).toLocaleString(
+      "pt-BR",
+      {
+        day:"2-digit",
+        month:"2-digit",
+        hour:"2-digit",
+        minute:"2-digit"
+      }
+    );
+
+  }catch(e){
+
+    return "";
+
+  }
+
+}
+
+
+function icon(category){
+
+  const icons = {
+
+    goals:"⚽",
+    btts:"🤝",
+    corners:"🚩",
+    cards:"🟨",
+    shots:"🎯",
+    shots_on_target:"🥅",
+    result:"🏆",
+    double_chance:"🛡️"
+
+  };
+
+  return icons[category] || "📊";
+
+}
+
+
+function riskClass(risk){
+
+  const r =
+    String(risk || "").toLowerCase();
+
+  if(r.includes("baixo"))
+    return "risk-low";
+
+  if(
+    r.includes("médio") ||
+    r.includes("medio")
+  )
+    return "risk-mid";
+
+  if(
+    r.includes("alto") &&
+    !r.includes("muito")
+  )
+    return "risk-high";
+
+  return "risk-vhigh";
+
+}
+
+
+function valueClass(edge){
+
+  const n = Number(edge || 0);
+
+  if(n >= 5)
+    return "value-good";
+
+  if(n >= 0)
+    return "value-neutral";
+
+  return "value-bad";
+
+}
+
+
+function valueLabel(edge){
+
+  const n = Number(edge || 0);
+
+  if(n >= 5)
+    return "💎 VALOR";
+
+  if(n >= 0)
+    return "NEUTRO";
+
+  return "SEM VALOR";
+
+}
+
+
+/* =====================================
+   NORMALIZAÇÃO
+===================================== */
+
+function normalizeRealOdds(analysis){
+
+  if(
+    Array.isArray(analysis.real_odds)
+  )
+    return analysis.real_odds;
+
+  if(
+    Array.isArray(analysis.external_markets)
+  )
+    return analysis.external_markets;
+
+  if(
+    Array.isArray(analysis.markets_external)
+  )
+    return analysis.markets_external;
+
+  return [];
+
+}
+
+
+function normalizeGame(game){
+
+  const fixture =
+    game.fixture || {};
+
+  const analysis =
+    game.analysis || {};
+
+  const model =
+    analysis.model || {};
+
+  const inner =
+    fixture.fixture || {};
+
+  const teams =
+    fixture.teams || {};
+
+  const home =
+    teams.home || {};
+
+  const away =
+    teams.away || {};
+
+  const markets =
+    Array.isArray(model.markets)
+      ? model.markets
+      : [];
+
+  const exactScores =
+    Array.isArray(model.exact_scores)
+      ? model.exact_scores
+      : [];
+
+  const realOdds =
+    normalizeRealOdds(analysis);
+
+  return {
+
+    id:
+      inner.id ||
+      inner.external_id ||
+      Math.random(),
+
+    date:
+      inner.date || "",
+
+    home:
+      home.name || "Casa",
+
+    away:
+      away.name || "Fora",
+
+    league:
+      fixture.league?.name || "",
+
+    country:
+      fixture.league?.country || "",
+
+    source:
+      analysis.source ||
+      game._source ||
+      "API",
+
+    model,
+
+    markets,
+
+    exactScores,
+
+    realOdds,
+
+    mostLikelyScore:
+      model.most_likely_score || null
+
+  };
+
+}
+
+
+/* =====================================
+   TRANSFORMAR ODDS REAIS
+===================================== */
+
+function bestRealOdds(game){
+
+  const oddsList =
+    Array.isArray(game.realOdds)
+      ? game.realOdds
+      : [];
+
+  return oddsList
+    .filter(x => odd(
+      x.price ??
+      x.odd ??
+      x.odds
+    ) > 1)
+    .sort((a,b) =>
+      odd(
+        b.price ??
+        b.odd ??
+        b.odds
+      ) -
+      odd(
+        a.price ??
+        a.odd ??
+        a.odds
+      )
+    )
+    .slice(0,6);
+
+}
+
+
+function findRealOddForMarket(game,m){
+
+  const oddsList =
+    Array.isArray(game.realOdds)
+      ? game.realOdds
+      : [];
+
+  if(!oddsList.length)
+    return null;
+
+  const modelMarket =
+    String(m.market || "")
+      .toLowerCase();
+
+  const probability =
+    pct(m.probability) / 100;
+
+  let candidates = [];
+
+  for(const r of oddsList){
+
+    const price =
+      odd(
+        r.price ??
+        r.odd ??
+        r.odds
+      );
+
+    if(price <= 1)
+      continue;
+
+    const name =
+      String(
+        r.name ??
+        r.value ??
+        r.outcome ??
+        r.market ??
+        ""
+      ).toLowerCase();
+
+    const market =
+      String(
+        r.market ??
+        r.bet ??
+        ""
+      ).toLowerCase();
+
+    let match = false;
+
+    if(
+      modelMarket.includes("casa") ||
+      modelMarket.includes("vence casa")
+    ){
+
+      match =
+        name.includes(
+          String(game.home).toLowerCase()
+        ) ||
+        name.includes("home") ||
+        name === "1";
+
+    }else if(
+      modelMarket.includes("empate")
+    ){
+
+      match =
+        name.includes("draw") ||
+        name.includes("empate") ||
+        name === "x";
+
+    }else if(
+      modelMarket.includes("fora") ||
+      modelMarket.includes("vence fora")
+    ){
+
+      match =
+        name.includes(
+          String(game.away).toLowerCase()
+        ) ||
+        name.includes("away") ||
+        name === "2";
+
+    }else{
+
+      const normalizedModel =
+        modelMarket
+          .replace(/[^a-z0-9]/g,"");
+
+      const normalizedName =
+        name
+          .replace(/[^a-z0-9]/g,"");
+
+      match =
+        normalizedName.includes(normalizedModel) ||
+        normalizedModel.includes(normalizedName);
+
+    }
+
+    if(match){
+
+      const implied =
+        1 / price;
+
+      const edge =
+        probability > 0
+          ? (probability - implied) * 100
+          : 0;
+
+      candidates.push({
+
+        ...r,
+
+        price,
+
+        implied_probability:
+          implied * 100,
+
+        edge
+
+      });
+
+    }
+
+  }
+
+  if(!candidates.length)
+    return null;
+
+  candidates.sort(
+    (a,b)=>
+      Number(b.edge || 0) -
+      Number(a.edge || 0)
+  );
+
+  return candidates[0];
+
+}
+
+
+/* =====================================
+   ANALISAR
+===================================== */
+
+async function run(){
+
+  const status =
+    document.getElementById("status");
+
+  const league =
+    document.getElementById("league").value;
+
+  const days =
+    document.getElementById("days").value;
+
+  status.innerHTML = `
+    <span class="loading">
+      <span class="spinner"></span>
+      Buscando jogos e calculando Props...
+    </span>
+  `;
+
+  document.getElementById("gamesBox").innerHTML =
+    `
+      <div class="empty">
+        <span class="loading">
+          <span class="spinner"></span>
+          Analisando partidas...
+        </span>
+      </div>
+    `;
+
+  try{
+
+    const url =
+      `/api/analyze?league=${encodeURIComponent(league)}&days=${encodeURIComponent(days)}`;
+
+    const response =
+      await fetch(
+        url,
+        {
+          cache:"no-store"
+        }
+      );
+
+    if(!response.ok)
+      throw new Error(
+        `HTTP ${response.status}`
+      );
+
+    const data =
+      await response.json();
+
+    if(
+      !data ||
+      !Array.isArray(data.games)
+    ){
+
+      throw new Error(
+        'A API não retornou o campo "games".'
+      );
+
+    }
+
+    allGames =
+      data.games
+        .map(normalizeGame)
+        .filter(
+          g => g.markets.length
+        );
+
+    allMarkets = [];
+
+    for(const game of allGames){
+
+      for(const m of game.markets){
+
+        const realOdd =
+          findRealOddForMarket(
+            game,
+            m
+          );
+
+        const fairOdd =
+          odd(m.fair_odd);
+
+        allMarkets.push({
+
+          gameId:
+            game.id,
+
+          home:
+            game.home,
+
+          away:
+            game.away,
+
+          date:
+            game.date,
+
+          league:
+            game.league,
+
+          source:
+            game.source,
+
+          market:
+            m.market ||
+            "Mercado",
+
+          category:
+            m.category ||
+            "other",
+
+          probability:
+            pct(m.probability),
+
+          odd:
+            fairOdd,
+
+          fairOdd,
+
+          realOdd:
+            realOdd
+              ? realOdd.price
+              : 0,
+
+          realBookmaker:
+            realOdd
+              ? (
+                  realOdd.bookmaker ||
+                  realOdd.bookmaker_name ||
+                  realOdd.source ||
+                  ""
+                )
+              : "",
+
+          impliedProbability:
+            realOdd
+              ? pct(
+                  realOdd.implied_probability
+                )
+              : 0,
+
+          edge:
+            realOdd
+              ? Number(realOdd.edge || 0)
+              : 0,
+
+          risk:
+            m.risk || "",
+
+          score:
+            Number(m.score || 0)
+
+        });
+
+      }
+
+    }
+
+    selectedMarkets = [];
+
+    document.getElementById(
+      "gamesCount"
+    ).textContent =
+      `${allGames.length} jogos`;
+
+    document.getElementById(
+      "featuredCount"
+    ).textContent =
+      `${allMarkets.length} oportunidades`;
+
+    const oddsAvailable =
+      allGames.some(
+        g => g.realOdds.length > 0
+      );
+
+    status.innerHTML = `
+      <span class="success">
+        ✅ ${allGames.length} jogos analisados •
+        ${allMarkets.length} Props encontradas
+        ${oddsAvailable ? " • 💰 odds reais encontradas" : ""}
+      </span>
+    `;
+
+    renderFeatured();
+
+    renderGames();
+
+    renderRanking();
+
+    buildCoupon();
+
+  }catch(e){
+
+    console.error(e);
+
+    status.innerHTML =
+      `
+      <span class="error">
+        ❌ ${esc(e.message)}
+      </span>
+      `;
+
+    document.getElementById(
+      "gamesBox"
+    ).innerHTML =
+      `
+      <div class="empty error">
+        Não foi possível carregar os jogos.
+        <br><br>
+        ${esc(e.message)}
+      </div>
+      `;
+
+  }
+
+}
+
+
+/* =====================================
+   MELHORES PROPS
+===================================== */
+
+function renderFeatured(){
+
+  const box =
+    document.getElementById(
+      "featured"
+    );
+
+  const list =
+    [...allMarkets]
+      .sort((a,b)=>{
+
+        if(
+          Number(b.edge || 0) !==
+          Number(a.edge || 0)
+        ){
+
+          return (
+            Number(b.edge || 0) -
+            Number(a.edge || 0)
+          );
+
+        }
+
+        if(
+          b.score !==
+          a.score
+        ){
+
+          return b.score -
+            a.score;
+
+        }
+
+        return (
+          b.probability -
+          a.probability
+        );
+
+      })
+      .slice(0,12);
+
+  if(!list.length){
+
+    box.innerHTML =
+      `
+      <div
+        class="empty"
+        style="width:100%"
+      >
+        Nenhuma Prop disponível.
+      </div>
+      `;
+
+    return;
+
+  }
+
+  box.innerHTML =
+    list.map(m => {
+
+      const hasReal =
+        m.realOdd > 0;
+
+      return `
+
+        <div class="prop">
+
+          ${
+            hasReal &&
+            m.edge >= 3
+              ? `
+                <div class="prop-value">
+                  💎 VALOR
+                </div>
+              `
+              : ""
+          }
+
+          <div class="prop-head">
+
+            <div class="prop-icon">
+              ${icon(m.category)}
+            </div>
+
+            <div class="prop-score">
+              Score ${m.score}
+            </div>
+
+          </div>
+
+          <div class="prop-game">
+            ${esc(m.home)}
+            x
+            ${esc(m.away)}
+          </div>
+
+          <div class="prop-name">
+            ${esc(m.market)}
+          </div>
+
+          <div class="prop-info">
+
+            <div class="probability">
+
+              ${m.probability.toFixed(1)}%
+
+              <small>
+                probabilidade
+              </small>
+
+            </div>
+
+            <div class="fair">
+
+              ${
+                hasReal
+                  ? m.realOdd.toFixed(2)
+                  : m.fairOdd.toFixed(2)
+              }
+
+              <small>
+                ${
+                  hasReal
+                    ? "odd real"
+                    : "odd justa"
+                }
+              </small>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =====================================
+   JOGOS
+===================================== */
+
+function renderGames(){
+
+  const box =
+    document.getElementById(
+      "gamesBox"
+    );
+
+  if(!allGames.length){
+
+    box.innerHTML =
+      `
+      <div class="empty">
+        Nenhum jogo disponível.
+      </div>
+      `;
+
+    return;
+
+  }
+
+  let html = "";
+
+  for(const game of allGames){
+
+    let markets =
+      [...game.markets];
+
+    if(
+      currentFilter !== "all"
+    ){
+
+      markets =
+        markets.filter(
+          m =>
+            m.category ===
+            currentFilter
+        );
+
+    }
+
+    markets.sort((a,b)=>{
+
+      if(
+        Number(b.score || 0) !==
+        Number(a.score || 0)
+      ){
+
+        return (
+          Number(b.score || 0) -
+          Number(a.score || 0)
+        );
+
+      }
+
+      return (
+        Number(b.probability || 0) -
+        Number(a.probability || 0)
+      );
+
+    });
+
+    if(!markets.length)
+      continue;
+
+
+    const scores =
+      Array.isArray(
+        game.exactScores
+      )
+        ? game.exactScores
+        : [];
+
+
+    const realOdds =
+      bestRealOdds(game);
+
+
+    html += `
+
+      <article class="game">
+
+        <div class="game-head">
+
+          <div class="game-top">
+
+            <div class="league">
+
+              ${esc(game.league)}
+
+            </div>
+
+            <div class="game-date">
+
+              ${formatDate(game.date)}
+
+            </div>
+
+          </div>
+
+
+          <div class="teams">
+
+            <div class="team">
+
+              ${esc(game.home)}
+
+            </div>
+
+            <div class="vs">
+
+              VS
+
+            </div>
+
+            <div class="team">
+
+              ${esc(game.away)}
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        ${
+          scores.length
+            ? `
+
+              <div class="exact-section">
+
+                <div class="sub-title">
+
+                  <strong>
+                    🔮 Possíveis placares
+                  </strong>
+
+                  <span>
+                    modelo
+                  </span>
+
+                </div>
+
+                <div class="exact-list">
+
+                  ${scores
+                    .slice(0,6)
+                    .map(s => `
+
+                      <div class="exact">
+
+                        <div class="exact-score">
+                          ${esc(
+                            s.score ||
+                            `${s.home_goals}x${s.away_goals}`
+                          )}
+                        </div>
+
+                        <div class="exact-prob">
+
+                          ${pct(
+                            s.probability
+                          ).toFixed(1)}%
+
+                        </div>
+
+                      </div>
+
+                    `).join("")}
+
+                </div>
+
+              </div>
+
+            `
+            : ""
+        }
+
+
+        <div class="model-box">
+
+          <div class="model-title">
+
+            <strong>
+              📊 Resumo do modelo
+            </strong>
+
+            <span>
+              ${
+                esc(
+                  game.model.model ||
+                  "Marques Pro"
+                )
+              }
+            </span>
+
+          </div>
+
+
+          <div class="model-grid">
+
+            <div class="model-stat">
+
+              <strong>
+                ${Number(
+                  game.model.expected_goals ??
+                  game.model.total_xg ??
+                  0
+                ).toFixed(2)}
+              </strong>
+
+              <small>
+                xG
+              </small>
+
+            </div>
+
+
+            <div class="model-stat">
+
+              <strong>
+                ${Number(
+                  game.model.expected_corners ??
+                  0
+                ).toFixed(1)}
+              </strong>
+
+              <small>
+                esc.
+              </small>
+
+            </div>
+
+
+            <div class="model-stat">
+
+              <strong>
+                ${Number(
+                  game.model.expected_cards ??
+                  0
+                ).toFixed(1)}
+              </strong>
+
+              <small>
+                cartões
+              </small>
+
+            </div>
+
+
+            <div class="model-stat">
+
+              <strong>
+                ${Number(
+                  game.model.expected_shots ??
+                  0
+                ).toFixed(1)}
+              </strong>
+
+              <small>
+                final.
+              </small>
+
+            </div>
+
+
+            <div class="model-stat">
+
+              <strong>
+                ${Number(
+                  game.model.expected_shots_on_target ??
+                  0
+                ).toFixed(1)}
+              </strong>
+
+              <small>
+                no gol
+              </small>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        ${
+          realOdds.length
+            ? `
+
+              <div class="odds-box">
+
+                <div class="odds-title">
+
+                  <strong>
+                    💰 Odds reais
+                  </strong>
+
+                  <span>
+                    melhores disponíveis
+                  </span>
+
+                </div>
+
+                ${realOdds
+                  .slice(0,5)
+                  .map(r => {
+
+                    const price =
+                      odd(
+                        r.price ??
+                        r.odd ??
+                        r.odds
+                      );
+
+                    const bookmaker =
+                      r.bookmaker ||
+                      r.bookmaker_name ||
+                      r.source ||
+                      "Provedor";
+
+                    const name =
+                      r.name ||
+                      r.value ||
+                      r.outcome ||
+                      r.market ||
+                      "Mercado";
+
+                    return `
+
+                      <div class="real-odd-row">
+
+                        <div class="real-market">
+
+                          <strong>
+                            ${esc(name)}
+                          </strong>
+
+                          <small>
+                            ${esc(bookmaker)}
+                          </small>
+
+                        </div>
+
+                        <div class="real-price">
+
+                          ${price.toFixed(2)}
+
+                        </div>
+
+                        <div class="value value-neutral">
+
+                          REAL
+
+                        </div>
+
+                      </div>
+
+                    `;
+
+                  }).join("")}
+
+              </div>
+
+            `
+            : `
+              <div class="odds-box">
+
+                <div class="odds-title">
+
+                  <strong>
+                    💰 Odds reais
+                  </strong>
+
+                  <span>
+                    não disponíveis
+                  </span>
+
+                </div>
+
+                <div style="
+                  color:var(--muted);
+                  font-size:8px;
+                  line-height:1.5
+                ">
+
+                  Nenhuma odd de bookmaker foi
+                  encontrada para esta partida.
+                  As probabilidades abaixo continuam
+                  sendo calculadas pelo modelo.
+
+                </div>
+
+              </div>
+            `
+        }
+
+
+        <div class="markets">
+
+          ${markets.map(m => {
+
+            const selected =
+              selectedMarkets.some(
+                x =>
+                  x.gameId ===
+                    game.id &&
+                  x.market ===
+                    m.market
+              );
+
+
+            const real =
+              allMarkets.find(
+                x =>
+                  x.gameId ===
+                    game.id &&
+                  x.market ===
+                    m.market
+              );
+
+
+            const hasReal =
+              real &&
+              real.realOdd > 0;
+
+
+            return `
+
+              <div
+                class="market ${
+                  hasReal &&
+                  real.edge >= 3
+                    ? "has-value"
+                    : ""
+                }"
+              >
+
+                <button
+                  class="add ${
+                    selected
+                      ? "selected"
+                      : ""
+                  }"
+                  onclick="toggleProp(
+                    ${JSON.stringify(game.id)},
+                    ${JSON.stringify(m.market)}
+                  )"
+                >
+
+                  ${
+                    selected
+                      ? "✓"
+                      : "+"
+                  }
+
+                </button>
+
+
+                <div class="market-name">
+
+                  ${icon(m.category)}
+
+                  ${esc(m.market)}
+
+                </div>
+
+
+                <div class="market-percent">
+
+                  ${pct(
+                    m.probability
+                  ).toFixed(1)}%
+
+                </div>
+
+
+                <div class="market-bottom">
+
+                  <span>
+
+                    Justa
+                    ${odd(
+                      m.fair_odd
+                    ).toFixed(2)}
+
+                  </span>
+
+
+                  ${
+                    hasReal
+                      ? `
+                        <span class="market-real">
+
+                          Real
+                          ${real.realOdd.toFixed(2)}
+
+                        </span>
+                      `
+                      : ""
+                  }
+
+
+                  <span
+                    class="${riskClass(
+                      m.risk
+                    )}"
+                  >
+
+                    ${esc(
+                      m.risk
+                    )}
+
+                  </span>
+
+                </div>
+
+
+                ${
+                  hasReal
+                    ? `
+                      <div
+                        class="market-value"
+                      >
+
+                        ${valueLabel(
+                          real.edge
+                        )}
+
+                        ${
+                          real.edge >= 0
+                            ? " +" +
+                              real.edge.toFixed(1) +
+                              "%"
+                            : ""
+                        }
+
+                      </div>
+                    `
+                    : ""
+                }
+
+              </div>
+
+            `;
+
+          }).join("")}
+
+        </div>
+
+      </article>
+
+    `;
+
+  }
+
+
+  box.innerHTML =
+    html ||
+    `
+    <div class="empty">
+      Nenhuma Prop encontrada neste filtro.
+    </div>
+    `;
+
+}
+
+
+/* =====================================
+   FILTRO
+===================================== */
+
+function filterMarket(
+  category,
+  button
+){
+
+  currentFilter =
+    category;
+
+  document
+    .querySelectorAll(".filter")
+    .forEach(
+      x =>
+        x.classList.remove(
+          "active"
+        )
+    );
+
+  button.classList.add(
+    "active"
+  );
+
+  renderGames();
+
+}
+
+
+/* =====================================
+   SELECIONAR PROP
+===================================== */
+
+function toggleProp(
+  gameId,
+  marketName
+){
+
+  const index =
+    selectedMarkets.findIndex(
+      x =>
+        x.gameId ===
+          gameId &&
+        x.market ===
+          marketName
+    );
+
+
+  if(index >= 0){
+
+    selectedMarkets.splice(
+      index,
+      1
+    );
+
+  }else{
+
+    const found =
+      allMarkets.find(
+        x =>
+          x.gameId ===
+            gameId &&
+          x.market ===
+            marketName
+      );
+
+    if(found)
+      selectedMarkets.push(
+        found
+      );
+
+  }
+
+
+  const max =
+    Number(
+      document.getElementById(
+        "maxSelections"
+      ).value
+    ) || 8;
+
+
+  if(
+    selectedMarkets.length >
+    max
+  ){
+
+    selectedMarkets.pop();
+
+    alert(
+      `Limite de ${max} props atingido.`
+    );
+
+  }
+
+
+  renderGames();
+
+  buildCoupon();
+
+}
+
+
+/* =====================================
+   CUPOM
+===================================== */
+
+function buildCoupon(){
+
+  const box =
+    document.getElementById(
+      "couponBox"
+    );
+
+  const count =
+    document.getElementById(
+      "couponCount"
+    );
+
+
+  count.textContent =
+    `${selectedMarkets.length} seleções`;
+
+
+  if(!selectedMarkets.length){
+
+    box.innerHTML =
+      `
+
+      <div class="empty">
+
+        🎟️ Seu cupom está vazio.
+
+        <br><br>
+
+        Toque no <strong>+</strong>
+        de uma Prop para adicioná-la.
+
+      </div>
+
+      `;
+
+    return;
+
+  }
+
+
+  let totalOdd = 1;
+
+  let usingReal =
+    false;
+
+
+  for(
+    const m of selectedMarkets
+  ){
+
+    const use =
+      m.realOdd > 1
+        ? m.realOdd
+        : m.fairOdd;
+
+
+    if(
+      m.realOdd > 1
+    )
+      usingReal = true;
+
+
+    if(use > 0)
+      totalOdd *= use;
+
+  }
+
+
+  let html =
+    `
+
+    <div class="coupon">
+
+      <div class="coupon-head">
+
+        <div>
+
+          <div class="coupon-title">
+            Meu Cupom
+          </div>
+
+          <div class="coupon-sub">
+
+            ${
+              usingReal
+                ? "Calculado com odds reais disponíveis"
+                : "Calculado com odds justas do modelo"
+            }
+
+          </div>
+
+        </div>
+
+
+        <div class="coupon-odd">
+
+          ${totalOdd.toFixed(2)}
+
+        </div>
+
+      </div>
+
+    `;
+
+
+  selectedMarkets.forEach(
+    (m,i)=>{
+
+      const useOdd =
+        m.realOdd > 1
+          ? m.realOdd
+          : m.fairOdd;
+
+
+      html += `
+
+        <div class="coupon-item">
+
+          <strong>
+
+            ${i+1}.
+            ${icon(m.category)}
+            ${esc(m.market)}
+
+          </strong>
+
+
+          <div class="coupon-game">
+
+            ${esc(m.home)}
+            x
+            ${esc(m.away)}
+
+          </div>
+
+
+          <div class="coupon-details">
+
+            <span>
+
+              Prob.
+              ${m.probability.toFixed(1)}%
+
+            </span>
+
+
+            <span>
+
+              Odd
+              ${useOdd.toFixed(2)}
+
+            </span>
+
+
+            ${
+              m.realOdd > 1
+                ? `
+                  <span class="coupon-real">
+
+                    💰 ${esc(
+                      m.realBookmaker ||
+                      "odd real"
+                    )}
+
+                  </span>
+                `
+                : `
+                  <span>
+                    Odd justa
+                  </span>
+                `
+            }
+
+
+            <span
+              class="${riskClass(
+                m.risk
+              )}"
+            >
+
+              ${esc(
+                m.risk
+              )}
+
+            </span>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+  );
+
+
+  html += `
+
+      <div class="coupon-warning">
+
+        ⚠️ As probabilidades e odds justas são
+        estimativas do modelo Marques Pro.
+        Odds reais dependem da disponibilidade
+        do provedor e podem mudar antes da aposta.
+        A odd do cupom é uma estimativa e não
+        garante o retorno.
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  box.innerHTML =
+    html;
+
+}
+
+
+/* =====================================
+   RANKING
+===================================== */
+
+function renderRanking(){
+
+  const box =
+    document.getElementById(
+      "rankingBox"
+    );
+
+
+  const list =
+    [...allMarkets]
+      .sort((a,b)=>{
+
+        if(
+          Number(b.edge || 0) !==
+          Number(a.edge || 0)
+        ){
+
+          return (
+            Number(b.edge || 0) -
+            Number(a.edge || 0)
+          );
+
+        }
+
+
+        if(
+          b.score !==
+          a.score
+        ){
+
+          return (
+            b.score -
+            a.score
+          );
+
+        }
+
+
+        return (
+          b.probability -
+          a.probability
+        );
+
+      })
+      .slice(0,50);
+
+
+  if(!list.length){
+
+    box.innerHTML =
+      `
+      <div class="empty">
+        Nenhum ranking disponível.
+      </div>
+      `;
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+    list.map(
+      (m,i)=>`
+
+      <div class="rank">
+
+        <div class="rank-number">
+
+          ${i+1}
+
+        </div>
+
+
+        <div class="rank-main">
+
+          <strong>
+
+            ${icon(m.category)}
+            ${esc(m.market)}
+
+          </strong>
+
+
+          <small>
+
+            ${esc(m.home)}
+            x
+            ${esc(m.away)}
+
+          </small>
+
+        </div>
+
+
+        <div class="rank-prob">
+
+          ${m.probability.toFixed(1)}%
+
+        </div>
+
+
+        <div class="rank-odd">
+
+          ${
+            m.realOdd > 1
+              ? m.realOdd.toFixed(2)
+              : m.fairOdd.toFixed(2)
+          }
+
+        </div>
+
+      </div>
+
+    `
+    ).join("");
+
+}
+
+
+/* =====================================
+   NAVEGAÇÃO
+===================================== */
+
+function showSection(
+  name,
+  button
+){
+
+  document
+    .querySelectorAll(".nav")
+    .forEach(
+      x =>
+        x.classList.remove(
+          "active"
+        )
+    );
+
+
+  button.classList.add(
+    "active"
+  );
+
+
+  const games =
+    document.getElementById(
+      "gamesSection"
+    );
+
+  const ranking =
+    document.getElementById(
+      "rankingSection"
+    );
+
+  const coupon =
+    document.getElementById(
+      "couponSection"
+    );
+
+
+  games.style.display =
+    name === "games"
+      ? "block"
+      : "none";
+
+
+  ranking.style.display =
+    name === "ranking"
+      ? "block"
+      : "none";
+
+
+  coupon.style.display =
+    name === "coupon"
+      ? "block"
+      : "none";
+
+
+  if(
+    name === "featured"
+  ){
+
+    games.style.display =
+      "block";
+
+
+    document
+      .getElementById(
+        "featured"
+      )
+      .scrollIntoView({
+        behavior:"smooth"
+      });
+
+  }
+
+
+  if(
+    name === "games"
+  ){
+
+    games.scrollIntoView({
+      behavior:"smooth"
+    });
+
+  }
+
+
+  if(
+    name === "ranking"
+  ){
+
+    ranking.scrollIntoView({
+      behavior:"smooth"
+    });
+
+  }
+
+
+  if(
+    name === "coupon"
+  ){
+
+    coupon.scrollIntoView({
+      behavior:"smooth"
+    });
+
+  }
+
+}
+
+
+/* =====================================
+   HEALTH
+===================================== */
+
+async function health(){
+
+  try{
+
+    const response =
+      await fetch(
+        "/api/health",
+        {
+          cache:"no-store"
+        }
+      );
+
+
+    if(!response.ok)
+      throw new Error(
+        "API offline"
+      );
+
+
+    const data =
+      await response.json();
+
+
+    console.log(
+      "Marques Pro API:",
+      data
+    );
+
+
+    const dot =
+      document.getElementById(
+        "statusDot"
+      );
+
+    const text =
+      document.getElementById(
+        "connectionText"
+      );
+
+
+    dot.classList.remove(
+      "off"
+    );
+
+    text.textContent =
+      "Online";
+
+
+    const af =
+      document.getElementById(
+        "afState"
+      );
+
+
+    const odds =
+      document.getElementById(
+        "oddsState"
+      );
+
+
+    if(
+      data.api_football
+    ){
+
+      af.textContent =
+        "conectada";
+
+      af.className =
+        "api-state api-ok";
+
+    }else{
+
+      af.textContent =
+        "não configurada";
+
+      af.className =
+        "api-state api-off";
+
+    }
+
+
+    if(
+      data.odds_api
+    ){
+
+      odds.textContent =
+        "conectada";
+
+      odds.className =
+        "api-state api-ok";
+
+    }else{
+
+      odds.textContent =
+        "não configurada";
+
+      odds.className =
+        "api-state api-off";
+
+    }
+
+  }catch(e){
+
+    console.log(
+      "API ainda não verificada."
+    );
+
+
+    document
+      .getElementById(
+        "statusDot"
+      )
+      .classList.add(
+        "off"
+      );
+
+
+    document
+      .getElementById(
+        "connectionText"
+      )
+      .textContent =
+      "API offline";
+
+  }
+
+}
+
+
+/* =====================================
+   INICIALIZAÇÃO
+===================================== */
+
+health();
+
+</script>
+
+</body>
+</html>
