@@ -1,0 +1,2246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marques Pro AI V20</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0b1020;
+      color: #f5f7fb;
+    }
+
+    button,
+    select,
+    input {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1200px, 94%);
+      margin: auto;
+    }
+
+    header {
+      padding: 24px 0 18px;
+      border-bottom: 1px solid #252d43;
+    }
+
+    .brand {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+
+    .subtitle {
+      color: #8f9bb3;
+      margin-top: 5px;
+      font-size: 14px;
+    }
+
+    .panel {
+      background: #12192b;
+      border: 1px solid #252d43;
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 18px;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr 130px 150px;
+      gap: 10px;
+    }
+
+    select,
+    input {
+      width: 100%;
+      background: #0c1222;
+      border: 1px solid #303a54;
+      color: white;
+      border-radius: 9px;
+      padding: 12px;
+      outline: none;
+    }
+
+    button {
+      border: 0;
+      border-radius: 9px;
+      padding: 12px 18px;
+      cursor: pointer;
+      font-weight: 700;
+      background: #fff;
+      color: #080d18;
+    }
+
+    button:disabled {
+      opacity: .5;
+      cursor: wait;
+    }
+
+    .status {
+      margin-top: 12px;
+      color: #9eabc2;
+      font-size: 13px;
+      min-height: 18px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 7px;
+      overflow-x: auto;
+      padding: 16px 0 4px;
+    }
+
+    .tab {
+      background: #151e33;
+      color: #aeb9cc;
+      border: 1px solid #29344d;
+      padding: 9px 13px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .tab.active {
+      background: white;
+      color: #0b1020;
+    }
+
+    .search {
+      margin-top: 10px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px 10px;
+      color: #aeb9cc;
+    }
+
+    .games {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+      margin: 18px 0 30px;
+    }
+
+    .game {
+      background: #12192b;
+      border: 1px solid #252d43;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .game-head {
+      padding: 16px;
+      border-bottom: 1px solid #252d43;
+    }
+
+    .league {
+      color: #8e9ab1;
+      font-size: 12px;
+      margin-bottom: 9px;
+    }
+
+    .teams {
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    .date {
+      color: #8490a8;
+      font-size: 12px;
+      margin-top: 7px;
+    }
+
+    .confidence {
+      margin-top: 12px;
+      display: inline-block;
+      padding: 6px 9px;
+      border-radius: 7px;
+      background: #1c2740;
+      font-size: 12px;
+      color: #dbe3f2;
+    }
+
+    .body {
+      padding: 15px;
+    }
+
+    .section {
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      color: #8996ae;
+      margin-bottom: 9px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+    }
+
+    .metric {
+      background: #0c1222;
+      border: 1px solid #222c43;
+      border-radius: 9px;
+      padding: 9px;
+    }
+
+    .metric-label {
+      color: #8591a9;
+      font-size: 11px;
+    }
+
+    .metric-value {
+      margin-top: 4px;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .market {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid #20283b;
+      font-size: 13px;
+    }
+
+    .market:last-child {
+      border-bottom: 0;
+    }
+
+    .market-name {
+      color: #c7cfdd;
+    }
+
+    .market-value {
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .bets {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .bet {
+      background: #182239;
+      border-radius: 9px;
+      padding: 10px;
+      font-size: 13px;
+    }
+
+    .scores {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .score {
+      background: #0c1222;
+      border: 1px solid #28334b;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .insufficient {
+      color: #c1cada;
+      background: #0c1222;
+      border: 1px solid #2b354b;
+      border-radius: 9px;
+      padding: 12px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 45px 15px;
+      color: #8996ae;
+    }
+
+    .error {
+      color: #e2c1c1;
+      background: #27171b;
+      border: 1px solid #523039;
+      padding: 13px;
+      border-radius: 9px;
+      line-height: 1.5;
+    }
+
+    footer {
+      color: #69758c;
+      text-align: center;
+      font-size: 11px;
+      padding: 10px 0 30px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 800px) {
+      .controls {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .controls button {
+        grid-column: span 2;
+      }
+
+      .games {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .brand {
+        font-size: 23px;
+      }
+
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .controls button {
+        grid-column: auto;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <header>
+      <div class="brand">MARQUES PRO AI</div>
+      <div class="subtitle">
+        Football Betting Intelligence · V20
+      </div>
+    </header>
+
+    <div class="panel">
+
+      <div class="controls">
+
+        <select id="league">
+          <option value="">Carregando campeonatos...</option>
+        </select>
+
+        <select id="days">
+          <option value="1">Hoje</option>
+          <option value="2">2 dias</option>
+          <option value="3">3 dias</option>
+          <option value="7">7 dias</option>
+        </select>
+
+        <button id="analyzeBtn" onclick="runAnalysis()">
+          ANALISAR
+        </button>
+
+      </div>
+
+      <div class="status" id="status">
+        Inicializando sistema...
+      </div>
+
+      <div class="tabs" id="tabs">
+
+        <button class="tab active" data-filter="all">
+          Todos
+        </button>
+
+        <button class="tab" data-filter="goals">
+          Gols
+        </button>
+
+        <button class="tab" data-filter="btts">
+          BTTS
+        </button>
+
+        <button class="tab" data-filter="corners">
+          Escanteios
+        </button>
+
+        <button class="tab" data-filter="cards">
+          Cartões
+        </button>
+
+        <button class="tab" data-filter="shots">
+          Chutes
+        </button>
+
+        <button class="tab" data-filter="sot">
+          Chutes no gol
+        </button>
+
+        <button class="tab" data-filter="double">
+          Dupla chance
+        </button>
+
+        <button class="tab" data-filter="result">
+          Resultado
+        </button>
+
+      </div>
+
+      <div class="search">
+        <input
+          id="search"
+          type="text"
+          placeholder="Pesquisar time..."
+          oninput="renderGames()"
+        >
+      </div>
+
+    </div>
+
+    <div id="content">
+      <div class="loading">
+        Carregando...
+      </div>
+    </div>
+
+    <footer>
+      Marques Pro AI V20 · As probabilidades são estimativas estatísticas
+      e não garantem resultado ou lucro em apostas.
+    </footer>
+
+  </div>
+
+
+<script>
+
+const state = {
+  games: [],
+  filter: "all",
+  league: "",
+  days: 1
+};
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function escapeHTML(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+function number(value, decimals = 2) {
+
+  if (value === null || value === undefined || value === "") {
+    return null;
+  }
+
+  const n = Number(value);
+
+  if (!Number.isFinite(n)) {
+    return null;
+  }
+
+  return n.toFixed(decimals);
+
+}
+
+
+function percent(value) {
+
+  if (value === null || value === undefined || value === "") {
+    return null;
+  }
+
+  let n = Number(value);
+
+  if (!Number.isFinite(n)) {
+    return null;
+  }
+
+  if (n >= 0 && n <= 1) {
+    n *= 100;
+  }
+
+  return Math.max(0, Math.min(100, n)).toFixed(1) + "%";
+
+}
+
+
+function confidence(value) {
+
+  if (value === null || value === undefined) {
+    return null;
+  }
+
+  let n = Number(value);
+
+  if (!Number.isFinite(n)) {
+    return null;
+  }
+
+  if (n <= 1) {
+    n *= 100;
+  }
+
+  return Math.max(0, Math.min(100, n)).toFixed(0) + "%";
+
+}
+
+
+function first(...values) {
+
+  for (const value of values) {
+
+    if (
+      value !== undefined &&
+      value !== null &&
+      value !== ""
+    ) {
+      return value;
+    }
+
+  }
+
+  return null;
+}
+
+
+function modelOf(game) {
+
+  return game?.model || {};
+}
+
+
+function fixtureOf(game) {
+
+  return game?.fixture || {};
+}
+
+
+function teamNames(game) {
+
+  const fixture = fixtureOf(game);
+
+  const home =
+    first(
+      game?.home_team,
+      game?.teams?.home?.name,
+      fixture?.teams?.home?.name,
+      fixture?.home_team
+    );
+
+  const away =
+    first(
+      game?.away_team,
+      game?.teams?.away?.name,
+      fixture?.teams?.away?.name,
+      fixture?.away_team
+    );
+
+  return {
+    home: home || "Casa",
+    away: away || "Fora"
+  };
+
+}
+
+
+function getDate(game) {
+
+  const fixture = fixtureOf(game);
+
+  const value =
+    first(
+      fixture?.date,
+      game?.date,
+      game?.start_time,
+      game?.datetime
+    );
+
+  if (!value) {
+    return "";
+  }
+
+  try {
+
+    return new Date(value).toLocaleString(
+      "pt-BR",
+      {
+        dateStyle: "short",
+        timeStyle: "short"
+      }
+    );
+
+  } catch {
+
+    return String(value);
+
+  }
+
+}
+
+
+/* =========================
+   MARKET HELPERS
+========================= */
+
+function arrayify(value) {
+
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  if (
+    value &&
+    typeof value === "object"
+  ) {
+
+    return Object.entries(value).map(
+      ([key, val]) => {
+
+        if (
+          val &&
+          typeof val === "object" &&
+          !Array.isArray(val)
+        ) {
+
+          return {
+            ...val,
+            name: val.name || key,
+            market: val.market || key
+          };
+
+        }
+
+        return {
+          name: key,
+          value: val
+        };
+
+      }
+    );
+
+  }
+
+  return [];
+
+}
+
+
+function marketName(item) {
+
+  if (typeof item === "string") {
+    return item;
+  }
+
+  return first(
+    item?.name,
+    item?.market,
+    item?.label,
+    item?.selection,
+    item?.bet,
+    item?.type,
+    "Mercado"
+  );
+
+}
+
+
+function marketValue(item) {
+
+  if (typeof item === "string") {
+    return null;
+  }
+
+  const value = first(
+    item?.probability,
+    item?.prob,
+    item?.confidence,
+    item?.percentage,
+    item?.value
+  );
+
+  if (
+    typeof value === "number" ||
+    (
+      typeof value === "string" &&
+      value.trim() !== ""
+    )
+  ) {
+
+    const n = Number(
+      String(value).replace("%", "")
+    );
+
+    if (Number.isFinite(n)) {
+
+      if (
+        String(value).includes("%") ||
+        n <= 1 ||
+        n <= 100
+      ) {
+
+        return percent(n);
+
+      }
+
+    }
+
+  }
+
+  return first(
+    item?.odd,
+    item?.odds,
+    item?.price,
+    item?.line
+  );
+
+}
+
+
+function getMarkets(model) {
+
+  const result = [];
+
+  const sources = [
+    model?.markets,
+    model?.props
+  ];
+
+  for (const source of sources) {
+
+    for (const item of arrayify(source)) {
+
+      if (!item) continue;
+
+      result.push(item);
+
+    }
+
+  }
+
+  return result;
+
+}
+
+
+function findMarket(model, words) {
+
+  const markets = getMarkets(model);
+
+  return markets.find(item => {
+
+    const name = marketName(item)
+      .toLowerCase();
+
+    return words.some(word =>
+      name.includes(word.toLowerCase())
+    );
+
+  });
+
+}
+
+
+/* =========================
+   BEST BETS
+========================= */
+
+function getBestBets(model) {
+
+  const source =
+    first(
+      model?.best_bets,
+      model?.top_markets
+    );
+
+  return arrayify(source);
+
+}
+
+
+/* =========================
+   PROBABILITIES
+========================= */
+
+function getProbabilities(model) {
+
+  const p =
+    model?.probabilities ||
+    model?.result_probability ||
+    {};
+
+  return {
+    home: first(
+      p?.home,
+      p?.home_win,
+      p?.1
+    ),
+
+    draw: first(
+      p?.draw,
+      p?.x
+    ),
+
+    away: first(
+      p?.away,
+      p?.away_win,
+      p?.2
+    ),
+
+    oneX: first(
+      p?.double_chance?.["1X"],
+      p?.["1X"],
+      p?.one_x
+    ),
+
+    xTwo: first(
+      p?.double_chance?.["X2"],
+      p?.["X2"],
+      p?.x_two
+    ),
+
+    twelve: first(
+      p?.double_chance?.["12"],
+      p?.["12"],
+      p?.one_two
+    )
+
+  };
+
+}
+
+
+/* =========================
+   EXACT SCORES
+========================= */
+
+function getExactScores(model) {
+
+  const source =
+    first(
+      model?.exact_scores,
+      model?.exact_score
+    );
+
+  return arrayify(source);
+
+}
+
+
+function exactScoreName(item) {
+
+  if (typeof item === "string") {
+    return item;
+  }
+
+  return first(
+    item?.score,
+    item?.name,
+    item?.label
+  );
+
+}
+
+
+function exactScoreProbability(item) {
+
+  if (typeof item === "string") {
+    return null;
+  }
+
+  return percent(
+    first(
+      item?.probability,
+      item?.prob,
+      item?.percentage
+    )
+  );
+
+}
+
+
+/* =========================
+   METRICS
+========================= */
+
+function metric(model, names) {
+
+  const sources = [
+    model?.metrics,
+    model
+  ];
+
+  for (const source of sources) {
+
+    if (!source) continue;
+
+    for (const name of names) {
+
+      if (
+        source[name] !== undefined &&
+        source[name] !== null
+      ) {
+
+        return number(
+          source[name],
+          2
+        );
+
+      }
+
+    }
+
+  }
+
+  return null;
+
+}
+
+
+/* =========================
+   FILTER
+========================= */
+
+function gameMatchesFilter(game) {
+
+  const model = modelOf(game);
+  const markets = getMarkets(model);
+
+  const text = JSON.stringify({
+    model,
+    markets
+  }).toLowerCase();
+
+  switch (state.filter) {
+
+    case "goals":
+      return (
+        text.includes("over") ||
+        text.includes("under") ||
+        text.includes("gol")
+      );
+
+    case "btts":
+      return text.includes("btts") ||
+             text.includes("ambas");
+
+    case "corners":
+      return text.includes("corner") ||
+             text.includes("escante");
+
+    case "cards":
+      return text.includes("card") ||
+             text.includes("cart");
+
+    case "shots":
+      return text.includes("shot") ||
+             text.includes("chute");
+
+    case "sot":
+      return text.includes("target") ||
+             text.includes("gol");
+
+    case "double":
+      return text.includes("double") ||
+             text.includes("dupla") ||
+             text.includes("1x") ||
+             text.includes("x2");
+
+    case "result":
+      return (
+        model?.probabilities ||
+        model?.result_probability
+      );
+
+    default:
+      return true;
+
+  }
+
+}
+
+
+/* =========================
+   HTML COMPONENTS
+========================= */
+
+function metricBox(label, value) {
+
+  if (value === null) {
+    return "";
+  }
+
+  return `
+    <div class="metric">
+      <div class="metric-label">
+        ${escapeHTML(label)}
+      </div>
+
+      <div class="metric-value">
+        ${escapeHTML(value)}
+      </div>
+    </div>
+  `;
+
+}
+
+
+function marketRow(name, value) {
+
+  if (!name || value === null || value === undefined) {
+    return "";
+  }
+
+  return `
+    <div class="market">
+
+      <span class="market-name">
+        ${escapeHTML(name)}
+      </span>
+
+      <span class="market-value">
+        ${escapeHTML(value)}
+      </span>
+
+    </div>
+  `;
+
+}
+
+
+/* =========================
+   GAME CARD
+========================= */
+
+function renderGame(game) {
+
+  const model = modelOf(game);
+  const teams = teamNames(game);
+  const fixture = fixtureOf(game);
+
+  const hasModel =
+    Object.keys(model).length > 0;
+
+  if (!hasModel) {
+
+    return `
+      <article class="game">
+
+        <div class="game-head">
+
+          <div class="league">
+            ${escapeHTML(
+              first(
+                game?.league,
+                fixture?.league?.name,
+                state.league
+              ) || "Campeonato"
+            )}
+          </div>
+
+          <div class="teams">
+            ${escapeHTML(teams.home)}
+            ×
+            ${escapeHTML(teams.away)}
+          </div>
+
+          <div class="date">
+            ${escapeHTML(getDate(game))}
+          </div>
+
+        </div>
+
+        <div class="body">
+
+          <div class="insufficient">
+            Dados estatísticos insuficientes para uma análise
+            confiável deste jogo.
+          </div>
+
+        </div>
+
+      </article>
+    `;
+
+  }
+
+
+  const p = getProbabilities(model);
+
+  const conf =
+    confidence(
+      first(
+        model?.confidence,
+        model?.model_confidence
+      )
+    );
+
+
+  const homeXG = metric(
+    model,
+    [
+      "home_xg",
+      "expected_home_goals",
+      "home_expected_goals"
+    ]
+  );
+
+  const awayXG = metric(
+    model,
+    [
+      "away_xg",
+      "expected_away_goals",
+      "away_expected_goals"
+    ]
+  );
+
+  const expectedGoals = metric(
+    model,
+    [
+      "expected_goals",
+      "total_xg",
+      "xg"
+    ]
+  );
+
+  const corners = metric(
+    model,
+    [
+      "expected_corners",
+      "corners",
+      "total_corners"
+    ]
+  );
+
+  const cards = metric(
+    model,
+    [
+      "expected_cards",
+      "cards",
+      "total_cards"
+    ]
+  );
+
+  const shots = metric(
+    model,
+    [
+      "expected_shots",
+      "shots",
+      "total_shots"
+    ]
+  );
+
+  const sot = metric(
+    model,
+    [
+      "expected_shots_on_target",
+      "shots_on_target",
+      "sot",
+      "expected_sot"
+    ]
+  );
+
+
+  /* GOLS */
+
+  const over15 =
+    findMarket(model, [
+      "over 1.5",
+      "mais de 1.5",
+      "over1.5"
+    ]);
+
+  const over25 =
+    findMarket(model, [
+      "over 2.5",
+      "mais de 2.5",
+      "over2.5"
+    ]);
+
+  const over35 =
+    findMarket(model, [
+      "over 3.5",
+      "mais de 3.5",
+      "over3.5"
+    ]);
+
+  const under25 =
+    findMarket(model, [
+      "under 2.5",
+      "menos de 2.5",
+      "under2.5"
+    ]);
+
+
+  /* BTTS */
+
+  const btts =
+    findMarket(model, [
+      "btts",
+      "ambas",
+      "both teams"
+    ]);
+
+
+  /* ESCANTEIOS */
+
+  const cornerMarket =
+    findMarket(model, [
+      "corner",
+      "escanteio"
+    ]);
+
+
+  /* CARTÕES */
+
+  const cardMarket =
+    findMarket(model, [
+      "card",
+      "cartão"
+    ]);
+
+
+  /* CHUTES */
+
+  const shotMarket =
+    findMarket(model, [
+      "shot",
+      "chute"
+    ]);
+
+
+  /* CHUTES NO GOL */
+
+  const sotMarket =
+    findMarket(model, [
+      "target",
+      "shots on target",
+      "chutes no gol"
+    ]);
+
+
+  /* MELHORES APOSTAS */
+
+  const bestBets = getBestBets(model);
+
+  /* PLACARES */
+
+  const scores = getExactScores(model);
+
+
+  return `
+    <article class="game">
+
+      <div class="game-head">
+
+        <div class="league">
+          ${escapeHTML(
+            first(
+              game?.league,
+              fixture?.league?.name,
+              state.league
+            ) || "Campeonato"
+          )}
+        </div>
+
+        <div class="teams">
+          ${escapeHTML(teams.home)}
+          ×
+          ${escapeHTML(teams.away)}
+        </div>
+
+        <div class="date">
+          ${escapeHTML(getDate(game))}
+        </div>
+
+        ${
+          conf
+            ? `
+              <div class="confidence">
+                Confiança do modelo: ${conf}
+              </div>
+            `
+            : ""
+        }
+
+      </div>
+
+
+      <div class="body">
+
+
+        <!-- RESULTADO -->
+
+        <div class="section">
+
+          <div class="section-title">
+            Resultado
+          </div>
+
+          <div class="grid">
+
+            ${metricBox(
+              teams.home,
+              percent(p.home)
+            )}
+
+            ${metricBox(
+              "Empate",
+              percent(p.draw)
+            )}
+
+            ${metricBox(
+              teams.away,
+              percent(p.away)
+            )}
+
+          </div>
+
+        </div>
+
+
+        <!-- DUPLA CHANCE -->
+
+        ${
+          (
+            p.oneX !== null ||
+            p.xTwo !== null ||
+            p.twelve !== null
+          )
+
+          ? `
+
+            <div class="section">
+
+              <div class="section-title">
+                Dupla chance
+              </div>
+
+              <div class="grid">
+
+                ${metricBox(
+                  "1X",
+                  percent(p.oneX)
+                )}
+
+                ${metricBox(
+                  "X2",
+                  percent(p.xTwo)
+                )}
+
+                ${metricBox(
+                  "12",
+                  percent(p.twelve)
+                )}
+
+              </div>
+
+            </div>
+
+          `
+
+          : ""
+        }
+
+
+        <!-- MÉTRICAS -->
+
+        ${
+          (
+            homeXG ||
+            awayXG ||
+            expectedGoals ||
+            corners ||
+            cards ||
+            shots ||
+            sot
+          )
+
+          ? `
+
+            <div class="section">
+
+              <div class="section-title">
+                Projeção estatística
+              </div>
+
+              <div class="grid">
+
+                ${metricBox(
+                  "Gols casa",
+                  homeXG
+                )}
+
+                ${metricBox(
+                  "Gols fora",
+                  awayXG
+                )}
+
+                ${metricBox(
+                  "Gols esperados",
+                  expectedGoals
+                )}
+
+                ${metricBox(
+                  "Escanteios",
+                  corners
+                )}
+
+                ${metricBox(
+                  "Cartões",
+                  cards
+                )}
+
+                ${metricBox(
+                  "Chutes",
+                  shots
+                )}
+
+                ${metricBox(
+                  "Chutes no gol",
+                  sot
+                )}
+
+              </div>
+
+            </div>
+
+          `
+
+          : ""
+        }
+
+
+        <!-- GOLS -->
+
+        ${
+          (
+            over15 ||
+            over25 ||
+            over35 ||
+            under25
+          )
+
+          ? `
+
+            <div class="section">
+
+              <div class="section-title">
+                Gols — Over / Under
+              </div>
+
+              ${marketRow(
+                marketName(over15),
+                marketValue(over15)
+              )}
+
+              ${marketRow(
+                marketName(over25),
+                marketValue(over25)
+              )}
+
+              ${marketRow(
+                marketName(over35),
+                marketValue(over35)
+              )}
+
+              ${marketRow(
+                marketName(under25),
+                marketValue(under25)
+              )}
+
+            </div>
+
+          `
+
+          : ""
+        }
+
+
+        <!-- BTTS -->
+
+        ${
+          btts
+
+          ? `
+
+            <div class="section">
+
+              <div class="section-title">
+                Ambas marcam
+              </div>
+
+              ${marketRow(
+                marketName(btts),
+                marketValue(btts)
+              )}
+
+            </div>
+
+          `
+
+          : ""
+        }
+
+
+        <!-- OUTROS MERCADOS -->
+
+        ${
+          (
+            cornerMarket ||
+            cardMarket ||
+            shotMarket ||
+            sotMarket
+          )
+
+          ? `
+
+            <div class="section">
+
+              <div class="section-title">
+                Mercados de estatísticas
+              </div>
+
+              ${marketRow(
+                marketName(cornerMarket),
+                marketValue(cornerMarket)
+              )}
+
+              ${marketRow(
+                marketName(cardMarket),
+                marketValue(cardMarket)
+              )}
+
+              ${marketRow(
+                marketName(shotMarket),
+                marketValue(shotMarket)
+              )}
+
+              ${marketRow(
+                marketName(sotMarket),
+                marketValue(sotMarket)
+              )}
+
+            </div>
+
+          `
+
+          : ""
+        }
+
+
+        <!-- PLACARES -->
+
+        ${
+          scores.length
+
+          ? `
+
+            <div class="section">
+
+              <div class="section-title">
+                Placares prováveis
+              </div>
+
+              <div class="scores">
+
+                ${
+                  scores
+                    .slice(0, 5)
+                    .map(item => `
+
+                      <div class="score">
+
+                        ${escapeHTML(
+                          exactScoreName(item)
+                          || "—"
+                        )}
+
+                        ${
+                          exactScoreProbability(item)
+                            ? `
+                              ·
+                              ${escapeHTML(
+                                exactScoreProbability(item)
+                              )}
+                            `
+                            : ""
+                        }
+
+                      </div>
+
+                    `)
+                    .join("")
+                }
+
+              </div>
+
+            </div>
+
+          `
+
+          : ""
+        }
+
+
+        <!-- MELHORES APOSTAS -->
+
+        ${
+          bestBets.length
+
+          ? `
+
+            <div class="section">
+
+              <div class="section-title">
+                Melhores apostas do modelo
+              </div>
+
+              <div class="bets">
+
+                ${
+                  bestBets
+                    .slice(0, 5)
+                    .map(item => {
+
+                      const name =
+                        marketName(item);
+
+                      const value =
+                        marketValue(item);
+
+                      return `
+                        <div class="bet">
+
+                          <strong>
+                            ${escapeHTML(name)}
+                          </strong>
+
+                          ${
+                            value
+                              ? `
+                                ·
+                                ${escapeHTML(value)}
+                              `
+                              : ""
+                          }
+
+                        </div>
+                      `;
+
+                    })
+                    .join("")
+                }
+
+              </div>
+
+            </div>
+
+          `
+
+          : ""
+        }
+
+
+        ${
+          !(
+            p.home !== null ||
+            p.draw !== null ||
+            p.away !== null ||
+            homeXG ||
+            awayXG ||
+            expectedGoals ||
+            corners ||
+            cards ||
+            shots ||
+            sot ||
+            bestBets.length ||
+            scores.length
+          )
+
+          ? `
+
+            <div class="insufficient">
+              Dados estatísticos insuficientes para uma análise
+              confiável deste jogo.
+            </div>
+
+          `
+
+          : ""
+        }
+
+
+      </div>
+
+    </article>
+  `;
+
+}
+
+
+/* =========================
+   RENDER
+========================= */
+
+function renderGames() {
+
+  const content =
+    document.getElementById("content");
+
+  const search =
+    document.getElementById("search")
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  let games =
+    state.games.filter(game => {
+
+      const teams =
+        teamNames(game);
+
+      const teamText =
+        (
+          teams.home +
+          " " +
+          teams.away
+        ).toLowerCase();
+
+      const searchOK =
+        !search ||
+        teamText.includes(search);
+
+      const filterOK =
+        gameMatchesFilter(game);
+
+      return searchOK && filterOK;
+
+    });
+
+
+  if (!games.length) {
+
+    content.innerHTML = `
+      <div class="panel empty">
+        Nenhum jogo encontrado para os filtros selecionados.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  content.innerHTML = `
+    <div class="games">
+
+      ${games.map(renderGame).join("")}
+
+    </div>
+  `;
+
+}
+
+
+/* =========================
+   API
+========================= */
+
+async function fetchJSON(url, timeout = 15000) {
+
+  const controller =
+    new AbortController();
+
+  const timer =
+    setTimeout(
+      () => controller.abort(),
+      timeout
+    );
+
+
+  try {
+
+    const response =
+      await fetch(
+        url,
+        {
+          signal: controller.signal,
+          cache: "no-store"
+        }
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        `HTTP ${response.status}`
+      );
+
+    }
+
+
+    return await response.json();
+
+  }
+
+  finally {
+
+    clearTimeout(timer);
+
+  }
+
+}
+
+
+/* =========================
+   HEALTH
+========================= */
+
+async function loadHealth() {
+
+  const status =
+    document.getElementById("status");
+
+
+  try {
+
+    const data =
+      await fetchJSON(
+        "/api/health",
+        10000
+      );
+
+
+    if (data?.ok) {
+
+      status.textContent =
+        `Sistema online · ${data.version || "Marques Pro AI V20"}`;
+
+    } else {
+
+      status.textContent =
+        "Servidor respondeu, mas o sistema não está pronto.";
+
+    }
+
+  } catch {
+
+    status.textContent =
+      "Não foi possível verificar o servidor.";
+
+  }
+
+}
+
+
+/* =========================
+   LEAGUES
+========================= */
+
+async function loadLeagues() {
+
+  const select =
+    document.getElementById("league");
+
+
+  try {
+
+    const data =
+      await fetchJSON(
+        "/api/leagues",
+        10000
+      );
+
+
+    let leagues = [];
+
+
+    if (Array.isArray(data)) {
+
+      leagues = data;
+
+    } else if (
+      Array.isArray(data?.leagues)
+    ) {
+
+      leagues = data.leagues;
+
+    }
+
+
+    leagues =
+      leagues
+        .map(item => {
+
+          if (
+            typeof item === "string"
+          ) {
+
+            return {
+              value: item,
+              label: item
+            };
+
+          }
+
+          return {
+            value:
+              first(
+                item?.value,
+                item?.name,
+                item?.league,
+                item?.country
+              ),
+
+            label:
+              first(
+                item?.label,
+                item?.name,
+                item?.league,
+                item?.country
+              )
+          };
+
+        })
+        .filter(item => item.value);
+
+
+    if (!leagues.length) {
+
+      throw new Error(
+        "Nenhum campeonato disponível"
+      );
+
+    }
+
+
+    select.innerHTML =
+      leagues.map(item => `
+
+        <option value="${escapeHTML(item.value)}">
+          ${escapeHTML(item.label)}
+        </option>
+
+      `).join("");
+
+
+    state.league =
+      select.value;
+
+
+    statusMessage(
+      "Campeonatos carregados. Escolha um período e clique em ANALISAR."
+    );
+
+
+  } catch (error) {
+
+    select.innerHTML = `
+      <option value="Brasil">
+        Brasil
+      </option>
+    `;
+
+    state.league = "Brasil";
+
+
+    statusMessage(
+      "Não foi possível carregar a lista de campeonatos. Brasil foi selecionado como padrão."
+    );
+
+  }
+
+}
+
+
+/* =========================
+   ANALYZE
+========================= */
+
+async function runAnalysis() {
+
+  const button =
+    document.getElementById("analyzeBtn");
+
+  const league =
+    document.getElementById("league")
+      .value;
+
+  const days =
+    Number(
+      document.getElementById("days")
+        .value
+    );
+
+
+  if (!league) {
+
+    statusMessage(
+      "Selecione um campeonato."
+    );
+
+    return;
+
+  }
+
+
+  state.league = league;
+  state.days = days;
+  state.games = [];
+
+
+  button.disabled = true;
+  button.textContent = "ANALISANDO...";
+
+
+  document.getElementById("content")
+    .innerHTML = `
+      <div class="panel loading">
+        Buscando jogos e calculando estatísticas...
+        <br><br>
+        Isso pode levar alguns segundos na primeira análise.
+      </div>
+    `;
+
+
+  statusMessage(
+    `Analisando ${league} · ${days} dia(s)...`
+  );
+
+
+  try {
+
+    const url =
+      `/api/analyze?league=${encodeURIComponent(league)}&days=${days}`;
+
+
+    const data =
+      await fetchJSON(
+        url,
+        45000
+      );
+
+
+    if (!data?.ok) {
+
+      throw new Error(
+        data?.error ||
+        "A API não conseguiu realizar a análise."
+      );
+
+    }
+
+
+    /*
+      IMPORTANTE:
+      O V20 retorna os jogos analisados
+      em data.games.
+
+      Não usamos fixtures como substituto,
+      pois isso poderia mostrar um jogo sem
+      análise estatística como se estivesse
+      analisado.
+    */
+
+    state.games =
+      Array.isArray(data.games)
+        ? data.games
+        : [];
+
+
+    if (!state.games.length) {
+
+      document.getElementById("content")
+        .innerHTML = `
+          <div class="panel empty">
+            Nenhum jogo foi analisado nesse período.
+            <br><br>
+            Tente outro campeonato ou aumente o período.
+          </div>
+        `;
+
+
+      statusMessage(
+        `Análise concluída · nenhum jogo analisado em ${league}.`
+      );
+
+      return;
+
+    }
+
+
+    renderGames();
+
+
+    statusMessage(
+      `${state.games.length} jogo(s) analisado(s) · ${league}`
+    );
+
+
+  } catch (error) {
+
+    console.error(error);
+
+
+    let message =
+      "Não foi possível concluir a análise.";
+
+
+    if (
+      error?.name === "AbortError"
+    ) {
+
+      message =
+        "A análise demorou mais que o esperado. O servidor pode estar processando o histórico estatístico.";
+
+    } else if (error?.message) {
+
+      message =
+        error.message;
+
+    }
+
+
+    document.getElementById("content")
+      .innerHTML = `
+        <div class="panel error">
+          <strong>Falha na análise</strong>
+          <br><br>
+          ${escapeHTML(message)}
+          <br><br>
+          Tente novamente ou selecione outro campeonato/período.
+        </div>
+      `;
+
+
+    statusMessage(
+      "Erro durante a análise."
+    );
+
+  } finally {
+
+    button.disabled = false;
+    button.textContent = "ANALISAR";
+
+  }
+
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+function statusMessage(message) {
+
+  document.getElementById("status")
+    .textContent = message;
+
+}
+
+
+/* =========================
+   EVENTS
+========================= */
+
+document
+  .getElementById("league")
+  .addEventListener(
+    "change",
+    event => {
+
+      state.league =
+        event.target.value;
+
+    }
+  );
+
+
+document
+  .getElementById("days")
+  .addEventListener(
+    "change",
+    event => {
+
+      state.days =
+        Number(event.target.value);
+
+    }
+  );
+
+
+document
+  .querySelectorAll(".tab")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        document
+          .querySelectorAll(".tab")
+          .forEach(btn =>
+            btn.classList.remove("active")
+          );
+
+
+        button.classList.add("active");
+
+
+        state.filter =
+          button.dataset.filter;
+
+
+        renderGames();
+
+      }
+    );
+
+  });
+
+
+/* =========================
+   START
+========================= */
+
+(async function init() {
+
+  await loadHealth();
+
+  await loadLeagues();
+
+})();
+
+</script>
+
+</body>
+</html>
