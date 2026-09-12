@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Marques Pro</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#07111f;
+  color:#eaf2ff;
+  font-family:Arial,Helvetica,sans-serif;
+}
+header{
+  padding:18px;
+  background:#0b1728;
+  border-bottom:1px solid #1d3048;
+}
+.logo{
+  font-size:25px;
+  font-weight:800;
+}
+.sub{
+  color:#8fa6c1;
+  font-size:13px;
+  margin-top:4px;
+}
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:18px;
+}
+.controls{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  background:#0c192b;
+  padding:14px;
+  border:1px solid #1d3048;
+  border-radius:14px;
+}
+label{
+  color:#8fa6c1;
+  font-size:12px;
+  display:block;
+  margin-bottom:5px;
+}
+select,input,button{
+  width:100%;
+  border:1px solid #29405d;
+  background:#101f33;
+  color:#fff;
+  border-radius:9px;
+  padding:11px;
+  font-size:14px;
+}
+button{
+  cursor:pointer;
+  font-weight:bold;
+}
+button.primary{
+  background:#1683ff;
+  border-color:#1683ff;
+}
+button.secondary{
+  background:#15263b;
+}
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin:14px 0;
+}
+.kpi{
+  background:#0c192b;
+  border:1px solid #1d3048;
+  border-radius:12px;
+  padding:14px;
+}
+.kpi span{
+  display:block;
+  color:#8fa6c1;
+  font-size:12px;
+}
+.kpi strong{
+  display:block;
+  font-size:22px;
+  margin-top:5px;
+}
+.tabs{
+  display:flex;
+  gap:8px;
+  margin:14px 0;
+}
+.tab{
+  width:auto;
+  padding:9px 15px;
+}
+.tab.active{
+  background:#1683ff;
+  border-color:#1683ff;
+}
+.panel{
+  display:none;
+}
+.panel.active{
+  display:block;
+}
+.status{
+  padding:12px;
+  border-radius:10px;
+  background:#0c192b;
+  border:1px solid #1d3048;
+  color:#a9bdd5;
+  margin-bottom:12px;
+}
+.game{
+  background:#0c192b;
+  border:1px solid #1d3048;
+  border-radius:14px;
+  margin-bottom:14px;
+  overflow:hidden;
+}
+.game-head{
+  padding:14px;
+  border-bottom:1px solid #1d3048;
+}
+.teams{
+  font-size:17px;
+  font-weight:bold;
+}
+.game-info{
+  margin-top:6px;
+  color:#8fa6c1;
+  font-size:12px;
+}
+.markets{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+  padding:12px;
+}
+.market{
+  background:#101f33;
+  border:1px solid #203650;
+  border-radius:10px;
+  padding:11px;
+}
+.market-top{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+}
+.market-name{
+  font-weight:bold;
+  font-size:13px;
+}
+.prob{
+  font-weight:bold;
+  color:#63b3ff;
+}
+.market-bottom{
+  display:flex;
+  justify-content:space-between;
+  margin-top:8px;
+  color:#8fa6c1;
+  font-size:11px;
+}
+.risk-low{color:#4ade80}
+.risk-mid{color:#facc15}
+.risk-high{color:#fb923c}
+.risk-vhigh{color:#f87171}
+.badge{
+  display:inline-block;
+  padding:3px 7px;
+  border-radius:20px;
+  background:#172b44;
+  font-size:10px;
+}
+.ranking-row{
+  display:grid;
+  grid-template-columns:45px 1fr 180px 90px 80px;
+  gap:10px;
+  align-items:center;
+  background:#0c192b;
+  border:1px solid #1d3048;
+  padding:12px;
+  margin-bottom:7px;
+  border-radius:10px;
+}
+.rank{
+  font-size:18px;
+  font-weight:bold;
+}
+.rank-main strong{
+  display:block;
+}
+.rank-main small{
+  color:#8fa6c1;
+}
+.rank-prob{
+  color:#63b3ff;
+  font-weight:bold;
+}
+.rank-odd{
+  font-weight:bold;
+}
+.coupon{
+  background:#0c192b;
+  border:1px solid #1d3048;
+  border-radius:14px;
+  padding:15px;
+}
+.coupon-item{
+  padding:11px 0;
+  border-bottom:1px solid #1d3048;
+}
+.coupon-item:last-child{
+  border-bottom:0;
+}
+.empty{
+  text-align:center;
+  padding:30px;
+  color:#8fa6c1;
+}
+.error{
+  color:#ff8f8f;
+}
+.success{
+  color:#65e6a0;
+}
+@media(max-width:800px){
+  .controls{grid-template-columns:1fr 1fr}
+  .kpis{grid-template-columns:1fr 1fr}
+  .markets{grid-template-columns:1fr}
+  .ranking-row{
+    grid-template-columns:35px 1fr 75px;
+  }
+  .ranking-row .rank-odd,
+  .ranking-row .rank-score{
+    display:none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">⚡ MARQUES PRO</div>
+  <div class="sub">Análise esportiva inteligente para apostas</div>
+</header>
+
+<div class="container">
+
+  <div class="controls">
+
+    <div>
+      <label>CAMPEONATO</label>
+      <select id="league">
+        <option value="Brasil">Brasil</option>
+        <option value="Inglaterra">Inglaterra</option>
+        <option value="Espanha">Espanha</option>
+        <option value="Itália">Itália</option>
+        <option value="Alemanha">Alemanha</option>
+        <option value="França">França</option>
+      </select>
+    </div>
+
+    <div>
+      <label>ODD ALVO</label>
+      <input id="target" type="number" value="10" min="1" step="1">
+    </div>
+
+    <div>
+      <label>MÁX. SELEÇÕES</label>
+      <input id="maxSelections" type="number" value="8" min="1" max="20">
+    </div>
+
+    <div>
+      <label>DIAS</label>
+      <select id="days">
+        <option value="1">Hoje</option>
+        <option value="2">Hoje + amanhã</option>
+        <option value="3">Próximos 3 dias</option>
+      </select>
+    </div>
+
+    <div>
+      <button class="primary" onclick="run()">🔎 ANALISAR JOGOS</button>
+    </div>
+
+    <div>
+      <button class="secondary" onclick="health()">⚙️ TESTAR API</button>
+    </div>
+
+    <div>
+      <button class="secondary" onclick="loadHistory()">📋 HISTÓRICO</button>
+    </div>
+
+  </div>
+
+  <div class="kpis">
+    <div class="kpi">
+      <span>JOGOS</span>
+      <strong id="kGames">0</strong>
+    </div>
+
+    <div class="kpi">
+      <span>MERCADOS</span>
+      <strong id="kMarkets">0</strong>
+    </div>
+
+    <div class="kpi">
+      <span>ODD CUPOM</span>
+      <strong id="kOdd">0.00</strong>
+    </div>
+
+    <div class="kpi">
+      <span>FONTE</span>
+      <strong id="kSource">—</strong>
+    </div>
+  </div>
+
+  <div id="status" class="status">
+    Pronto para analisar.
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="tab('coupon',this)">🎟️ CUPOM</button>
+    <button class="tab" onclick="tab('ranking',this)">🏆 RANKING</button>
+    <button class="tab" onclick="tab('games',this)">⚽ JOGOS</button>
+    <button class="tab" onclick="tab('history',this)">📋 HISTÓRICO</button>
+  </div>
+
+  <div id="coupon" class="panel active">
+    <div id="couponBox" class="coupon">
+      <div class="empty">
+        Faça uma análise para gerar o cupom.
+      </div>
+    </div>
+  </div>
+
+  <div id="ranking" class="panel">
+    <div id="rankingBox">
+      <div class="empty">Nenhum dado ainda.</div>
+    </div>
+  </div>
+
+  <div id="games" class="panel">
+    <div id="gamesBox">
+      <div class="empty">Nenhum jogo analisado.</div>
+    </div>
+  </div>
+
+  <div id="history" class="panel">
+    <div id="historyBox">
+      <div class="empty">Histórico vazio.</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+
+let allGames = [];
+let allMarkets = [];
+let coupon = [];
+
+/* =========================
+   UTILIDADES
+========================= */
+
+function esc(v){
+  return String(v ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;");
+}
+
+function pct(v){
+  let n = Number(v);
+  if(!Number.isFinite(n)) return 0;
+  return n;
+}
+
+function odd(v){
+  let n = Number(v);
+  if(!Number.isFinite(n) || n <= 0) return 0;
+  return n;
+}
+
+function riskClass(risk){
+  risk = String(risk || "").toLowerCase();
+
+  if(risk.includes("baixo")) return "risk-low";
+  if(risk.includes("médio")) return "risk-mid";
+  if(risk.includes("alto") && !risk.includes("muito")) return "risk-high";
+  return "risk-vhigh";
+}
+
+function marketIcon(category){
+  const icons = {
+    goals:"⚽",
+    btts:"🤝",
+    corners:"🚩",
+    cards:"🟨",
+    shots:"🎯",
+    shots_on_target:"🥅",
+    result:"🏆",
+    double_chance:"🛡️"
+  };
+
+  return icons[category] || "📊";
+}
+
+function formatDate(date){
+  if(!date) return "";
+
+  try{
+    return new Date(date).toLocaleString("pt-BR",{
+      day:"2-digit",
+      month:"2-digit",
+      hour:"2-digit",
+      minute:"2-digit"
+    });
+  }catch(e){
+    return date;
+  }
+}
+
+
+/* =========================
+   HEALTH
+========================= */
+
+async function health(){
+
+  const status = document.getElementById("status");
+
+  status.textContent = "Testando conexão com a API...";
+
+  try{
+
+    const r = await fetch("/api/health",{
+      cache:"no-store"
+    });
+
+    const data = await r.json();
+
+    status.innerHTML =
+      `<span class="success">
+        API OK • API-Football: ${data.api_football ? "ON" : "OFF"}
+        • Odds API: ${data.odds_api ? "ON" : "OFF"}
+      </span>`;
+
+  }catch(e){
+
+    status.innerHTML =
+      `<span class="error">Erro na API: ${esc(e.message)}</span>`;
+
+  }
+}
+
+
+/* =========================
+   NORMALIZAÇÃO
+========================= */
+
+function normalizeGame(game){
+
+  const fixture = game.fixture || {};
+  const analysis = game.analysis || {};
+  const model = analysis.model || {};
+
+  /*
+    IMPORTANTE:
+
+    A API atual retorna:
+
+    game
+      ├── fixture
+      │    ├── fixture
+      │    ├── teams
+      │    └── league
+      │
+      └── analysis
+           └── model
+                └── markets
+  */
+
+  const innerFixture = fixture.fixture || {};
+  const teams = fixture.teams || {};
+
+  const home = teams.home || {};
+  const away = teams.away || {};
+
+  const markets = Array.isArray(model.markets)
+    ? model.markets
+    : [];
+
+  return {
+    id: innerFixture.id || innerFixture.external_id || Math.random(),
+    externalId: innerFixture.external_id || "",
+    date: innerFixture.date || "",
+    status: innerFixture.status || {},
+    home: home.name || "Casa",
+    away: away.name || "Fora",
+    homeLogo: home.logo || "",
+    awayLogo: away.logo || "",
+    league: fixture.league?.name || "",
+    source: game._source || analysis.source || "API",
+    model: model,
+    markets: markets
+  };
+}
+
+
+/* =========================
+   ANALISAR
+========================= */
+
+async function run(){
+
+  const status = document.getElementById("status");
+  const league = document.getElementById("league").value;
+  const days = document.getElementById("days").value;
+
+  status.textContent =
+    `Buscando jogos de ${league}...`;
+
+  document.getElementById("gamesBox").innerHTML =
+    `<div class="empty">Carregando análises...</div>`;
+
+  try{
+
+    const url =
+      `/api/analyze?league=${encodeURIComponent(league)}&days=${days}`;
+
+    const response = await fetch(url,{
+      cache:"no-store"
+    });
+
+    if(!response.ok){
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if(!data || !Array.isArray(data.games)){
+      throw new Error(
+        'Resposta inválida: campo "games" não encontrado.'
+      );
+    }
+
+    allGames = data.games
+      .map(normalizeGame)
+      .filter(g => g.markets.length > 0);
+
+    allMarkets = [];
+
+    for(const game of allGames){
+
+      for(const m of game.markets){
+
+        const probability = pct(m.probability);
+        const fairOdd = odd(m.fair_odd);
+
+        allMarkets.push({
+          gameId: game.id,
+          home: game.home,
+          away: game.away,
+          date: game.date,
+          league: game.league,
+          source: game.source,
+
+          market: m.market || "Mercado",
+          category: m.category || "other",
+
+          probability: probability,
+          odd: fairOdd,
+
+          risk: m.risk || "",
+          score: Number(m.score || 0)
+        });
+
+      }
+
+    }
+
+    document.getElementById("kGames").textContent =
+      data.count ?? allGames.length;
+
+    document.getElementById("kMarkets").textContent =
+      allMarkets.length;
+
+    document.getElementById("kSource").textContent =
+      data.source || "API";
+
+    status.innerHTML =
+      `<span class="success">
+        ${allGames.length} jogos encontrados e ${allMarkets.length} mercados analisados.
+      </span>`;
+
+    renderGames();
+    renderRanking();
+    buildCoupon();
+
+  }catch(e){
+
+    console.error(e);
+
+    status.innerHTML =
+      `<span class="error">
+        Erro ao analisar: ${esc(e.message)}
+      </span>`;
+
+    document.getElementById("gamesBox").innerHTML =
+      `<div class="empty error">
+        ${esc(e.message)}
+      </div>`;
+
+  }
+}
+
+
+/* =========================
+   RENDER JOGOS
+========================= */
+
+function renderGames(){
+
+  const box = document.getElementById("gamesBox");
+
+  if(!allGames.length){
+
+    box.innerHTML =
+      `<div class="empty">
+        Nenhum jogo com mercados disponíveis.
+      </div>`;
+
+    return;
+  }
+
+  let html = "";
+
+  for(const game of allGames){
+
+    const markets = [...game.markets]
+      .sort((a,b) =>
+        Number(b.score || 0) -
+        Number(a.score || 0)
+      );
+
+    html += `
+      <div class="game">
+
+        <div class="game-head">
+
+          <div class="teams">
+            ${esc(game.home)}
+            <span style="color:#7188a4"> x </span>
+            ${esc(game.away)}
+          </div>
+
+          <div class="game-info">
+            ${esc(game.league)}
+            ${game.date ? " • " + formatDate(game.date) : ""}
+            • Fonte: ${esc(game.source)}
+          </div>
+
+        </div>
+
+        <div class="markets">
+
+          ${markets.map(m => `
+
+            <div class="market">
+
+              <div class="market-top">
+
+                <div class="market-name">
+                  ${marketIcon(m.category)}
+                  ${esc(m.market)}
+                </div>
+
+                <div class="prob">
+                  ${pct(m.probability).toFixed(1)}%
+                </div>
+
+              </div>
+
+              <div class="market-bottom">
+
+                <span>
+                  Odd justa:
+                  <strong>${odd(m.fair_odd).toFixed(2)}</strong>
+                </span>
+
+                <span class="${riskClass(m.risk)}">
+                  ${esc(m.risk || "—")}
+                </span>
+
+                <span>
+                  Score ${Number(m.score || 0)}
+                </span>
+
+              </div>
+
+            </div>
+
+          `).join("")}
+
+        </div>
+
+      </div>
+    `;
+  }
+
+  box.innerHTML = html;
+}
+
+
+/* =========================
+   RANKING
+========================= */
+
+function renderRanking(){
+
+  const box = document.getElementById("rankingBox");
+
+  if(!allMarkets.length){
+
+    box.innerHTML =
+      `<div class="empty">Nenhum mercado disponível.</div>`;
+
+    return;
+  }
+
+  const ranking = [...allMarkets]
+    .sort((a,b) => {
+
+      const scoreA = Number(a.score || 0);
+      const scoreB = Number(b.score || 0);
+
+      if(scoreB !== scoreA)
+        return scoreB - scoreA;
+
+      return Number(b.probability || 0) -
+             Number(a.probability || 0);
+
+    })
+    .slice(0,100);
+
+  let html = "";
+
+  ranking.forEach((m,i) => {
+
+    html += `
+
+      <div class="ranking-row">
+
+        <div class="rank">
+          #${i+1}
+        </div>
+
+        <div class="rank-main">
+
+          <strong>
+            ${marketIcon(m.category)}
+            ${esc(m.market)}
+          </strong>
+
+          <small>
+            ${esc(m.home)} x ${esc(m.away)}
+            • ${esc(m.league)}
+          </small>
+
+        </div>
+
+        <div class="rank-prob">
+          ${m.probability.toFixed(1)}%
+        </div>
+
+        <div class="rank-odd">
+          ${m.odd.toFixed(2)}
+        </div>
+
+        <div class="rank-score">
+          Score ${m.score}
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+  box.innerHTML = html;
+}
+
+
+/* =========================
+   CUPOM
+========================= */
+
+function buildCoupon(){
+
+  const target =
+    Number(document.getElementById("target").value || 10);
+
+  const maxSelections =
+    Number(document.getElementById("maxSelections").value || 8);
+
+  if(!allMarkets.length){
+
+    document.getElementById("couponBox").innerHTML =
+      `<div class="empty">
+        Nenhum mercado disponível para montar o cupom.
+      </div>`;
+
+    return;
+  }
+
+  /*
+    Ordenamos por score/probabilidade.
+
+    Evitamos colocar vários mercados
+    diferentes do mesmo jogo.
+  */
+
+  const candidates = [...allMarkets]
+    .filter(m =>
+      m.odd > 1 &&
+      m.probability > 0
+    )
+    .sort((a,b) => {
+
+      const sa =
+        Number(a.score || 0) +
+        Number(a.probability || 0) * 0.2;
+
+      const sb =
+        Number(b.score || 0) +
+        Number(b.probability || 0) * 0.2;
+
+      return sb - sa;
+
+    });
+
+  let selected = [];
+  let totalOdd = 1;
+  const usedGames = new Set();
+
+  /*
+    Primeiro tentamos mercados
+    de maior probabilidade.
+  */
+
+  for(const m of candidates){
+
+    if(selected.length >= maxSelections)
+      break;
+
+    if(usedGames.has(m.gameId))
+      continue;
+
+    if(m.probability < 45)
+      continue;
+
+    selected.push(m);
+    usedGames.add(m.gameId);
+
+    totalOdd *= m.odd;
+
+    if(totalOdd >= target)
+      break;
+
+  }
+
+  /*
+    Se ainda não chegou na odd alvo,
+    permitimos repetir jogos.
+  */
+
+  if(totalOdd < target){
+
+    for(const m of candidates){
+
+      if(selected.length >= maxSelections)
+        break;
+
+      if(selected.includes(m))
+        continue;
+
+      selected.push(m);
+
+      totalOdd *= m.odd;
+
+      if(totalOdd >= target)
+        break;
+
+    }
+
+  }
+
+  coupon = selected;
+
+  document.getElementById("kOdd").textContent =
+    totalOdd.toFixed(2);
+
+  renderCoupon(totalOdd,target);
+}
+
+
+/* =========================
+   RENDER CUPOM
+========================= */
+
+function renderCoupon(totalOdd,target){
+
+  const box =
+    document.getElementById("couponBox");
+
+  if(!coupon.length){
+
+    box.innerHTML =
+      `<div class="empty">
+        Não foi possível montar o cupom.
+      </div>`;
+
+    return;
+  }
+
+  let html = `
+
+    <div style="margin-bottom:15px">
+
+      <strong style="font-size:18px">
+        🎟️ Cupom Marques Pro
+      </strong>
+
+      <div style="color:#8fa6c1;font-size:12px;margin-top:5px">
+        Odd alvo: ${target.toFixed(2)}
+        • Odd calculada: ${totalOdd.toFixed(2)}
+        • ${coupon.length} seleções
+      </div>
+
+    </div>
+
+  `;
+
+  coupon.forEach((m,i) => {
+
+    html += `
+
+      <div class="coupon-item">
+
+        <div>
+          <strong>
+            ${i+1}. ${esc(m.market)}
+          </strong>
+        </div>
+
+        <div style="color:#8fa6c1;font-size:12px;margin-top:4px">
+          ${esc(m.home)} x ${esc(m.away)}
+        </div>
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          margin-top:7px;
+          font-size:12px;
+        ">
+
+          <span>
+            Probabilidade:
+            <strong>${m.probability.toFixed(1)}%</strong>
+          </span>
+
+          <span>
+            Odd justa:
+            <strong>${m.odd.toFixed(2)}</strong>
+          </span>
+
+          <span class="${riskClass(m.risk)}">
+            ${esc(m.risk)}
+          </span>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+  html += `
+
+    <div style="
+      margin-top:15px;
+      padding-top:15px;
+      border-top:1px solid #1d3048;
+      display:flex;
+      justify-content:space-between;
+    ">
+
+      <strong>ODD TOTAL</strong>
+
+      <strong style="font-size:22px">
+        ${totalOdd.toFixed(2)}
+      </strong>
+
+    </div>
+
+    <div style="
+      margin-top:10px;
+      color:#8fa6c1;
+      font-size:11px;
+    ">
+      ⚠️ As odds exibidas são odds justas calculadas pelo modelo,
+      não necessariamente as odds oferecidas pela casa.
+    </div>
+
+  `;
+
+  box.innerHTML = html;
+}
+
+
+/* =========================
+   HISTÓRICO
+========================= */
+
+async function loadHistory(){
+
+  tab("history");
+
+  const box =
+    document.getElementById("historyBox");
+
+  box.innerHTML =
+    `<div class="empty">Carregando histórico...</div>`;
+
+  try{
+
+    const r = await fetch("/api/history",{
+      cache:"no-store"
+    });
+
+    const data = await r.json();
+
+    const items =
+      Array.isArray(data)
+        ? data
+        : Array.isArray(data.history)
+          ? data.history
+          : [];
+
+    if(!items.length){
+
+      box.innerHTML =
+        `<div class="empty">
+          Nenhum histórico encontrado.
+        </div>`;
+
+      return;
+    }
+
+    box.innerHTML = items
+      .slice()
+      .reverse()
+      .map((x,i) => `
+
+        <div class="game">
+
+          <div class="game-head">
+
+            <strong>
+              Registro ${items.length-i}
+            </strong>
+
+            <div class="game-info">
+              ${esc(JSON.stringify(x))}
+            </div>
+
+          </div>
+
+        </div>
+
+      `)
+      .join("");
+
+  }catch(e){
+
+    box.innerHTML =
+      `<div class="empty error">
+        Erro ao carregar histórico:
+        ${esc(e.message)}
+      </div>`;
+
+  }
+}
+
+
+/* =========================
+   ABAS
+========================= */
+
+function tab(name,button){
+
+  document.querySelectorAll(".panel")
+    .forEach(x => x.classList.remove("active"));
+
+  document.getElementById(name)
+    .classList.add("active");
+
+  document.querySelectorAll(".tab")
+    .forEach(x => x.classList.remove("active"));
+
+  if(button){
+    button.classList.add("active");
+  }else{
+
+    document.querySelectorAll(".tab")
+      .forEach(x => {
+
+        if(
+          x.textContent.toLowerCase()
+            .includes(name === "history" ? "histórico" : name)
+        ){
+          x.classList.add("active");
+        }
+
+      });
+
+  }
+
+}
+
+
+/* =========================
+   ATUALIZA CUPOM
+========================= */
+
+document.getElementById("target")
+  .addEventListener("change",() => {
+
+    if(allMarkets.length)
+      buildCoupon();
+
+  });
+
+document.getElementById("maxSelections")
+  .addEventListener("change",() => {
+
+    if(allMarkets.length)
+      buildCoupon();
+
+  });
+
+
+/* =========================
+   TESTE INICIAL
+========================= */
+
+health();
+
+</script>
+
+</body>
+</html>
