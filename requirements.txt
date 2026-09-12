@@ -1,0 +1,1 @@
+# Sem dependências externas: Python 3.10+ / biblioteca padrão.
