@@ -1,0 +1,2742 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marques Pro</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #07110d;
+      --bg2: #0b1712;
+      --card: #101e18;
+      --card2: #14251d;
+      --border: #20382c;
+      --green: #20e47b;
+      --green2: #0fb861;
+      --text: #f2f7f4;
+      --muted: #8da198;
+      --yellow: #ffd166;
+      --red: #ff6472;
+      --blue: #61a8ff;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 50% -10%, rgba(32,228,123,.14), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      padding-bottom: 90px;
+    }
+
+    button,
+    select,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 1050px;
+      margin: auto;
+      padding: 16px;
+    }
+
+    /* HEADER */
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .logo {
+      width: 43px;
+      height: 43px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--green), #087b43);
+      color: #04150c;
+      font-size: 20px;
+      font-weight: 900;
+      box-shadow: 0 0 25px rgba(32,228,123,.22);
+    }
+
+    .brand h1 {
+      font-size: 21px;
+      letter-spacing: -.5px;
+    }
+
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .status-dot {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--green);
+    }
+
+    /* HERO */
+
+    .hero {
+      background: linear-gradient(145deg, #11251b, #0b1712);
+      border: 1px solid var(--border);
+      border-radius: 23px;
+      padding: 22px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero:after {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      right: -80px;
+      top: -80px;
+      background: rgba(32,228,123,.08);
+      border-radius: 50%;
+    }
+
+    .hero h2 {
+      font-size: 27px;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      max-width: 650px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* CONTROLS */
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .field label {
+      color: var(--muted);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    select,
+    input {
+      width: 100%;
+      background: #09150f;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 13px;
+      outline: none;
+    }
+
+    select:focus,
+    input:focus {
+      border-color: var(--green);
+    }
+
+    .primary {
+      width: 100%;
+      border: 0;
+      border-radius: 13px;
+      padding: 13px;
+      color: #03130b;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--green), #0fc76b);
+      box-shadow: 0 8px 24px rgba(32,228,123,.15);
+    }
+
+    .primary:active {
+      transform: scale(.99);
+    }
+
+    /* NAV FILTER */
+
+    .market-tabs {
+      display: flex;
+      gap: 7px;
+      overflow-x: auto;
+      padding: 3px 0 12px;
+      scrollbar-width: none;
+    }
+
+    .market-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab {
+      white-space: nowrap;
+      border: 1px solid var(--border);
+      background: #0c1913;
+      color: var(--muted);
+      border-radius: 30px;
+      padding: 8px 13px;
+      font-size: 11px;
+    }
+
+    .tab.active {
+      background: rgba(32,228,123,.12);
+      border-color: var(--green2);
+      color: var(--green);
+    }
+
+    /* SEARCH */
+
+    .search {
+      margin-bottom: 12px;
+    }
+
+    /* SECTIONS */
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 17px 2px 10px;
+    }
+
+    .section-title h3 {
+      font-size: 16px;
+    }
+
+    .section-title span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* GAME */
+
+    .game {
+      background: linear-gradient(150deg, #101e18, #0c1812);
+      border: 1px solid var(--border);
+      border-radius: 19px;
+      margin-bottom: 13px;
+      overflow: hidden;
+    }
+
+    .game-top {
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .game-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 10px;
+      margin-bottom: 11px;
+    }
+
+    .league {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .teams {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .team {
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .team.away {
+      text-align: right;
+    }
+
+    .vs {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .confidence {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 30px;
+      padding: 5px 8px;
+      background: rgba(32,228,123,.08);
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    /* MODEL */
+
+    .model {
+      padding: 13px 14px;
+    }
+
+    .model-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .stat-box {
+      background: #0a1610;
+      border: 1px solid #1b3025;
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    .stat-box small {
+      color: var(--muted);
+      font-size: 9px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .stat-box strong {
+      font-size: 15px;
+    }
+
+    .result-probs {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 7px;
+      margin-bottom: 13px;
+    }
+
+    .prob {
+      text-align: center;
+      background: #0b1812;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 9px 4px;
+    }
+
+    .prob small {
+      display: block;
+      color: var(--muted);
+      font-size: 9px;
+      margin-bottom: 3px;
+    }
+
+    .prob strong {
+      font-size: 14px;
+    }
+
+    /* PROPS */
+
+    .props {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .prop {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+      background: #0a1610;
+      border: 1px solid #1b3025;
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    .prop-info strong {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 3px;
+    }
+
+    .prop-info small {
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .prop-side {
+      text-align: right;
+    }
+
+    .odd {
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--green);
+    }
+
+    .value {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 8px;
+      border-radius: 5px;
+      padding: 3px 5px;
+      background: rgba(32,228,123,.1);
+      color: var(--green);
+    }
+
+    .add-prop {
+      border: 1px solid #27533c;
+      background: rgba(32,228,123,.07);
+      color: var(--green);
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      font-size: 18px;
+      margin-left: 5px;
+    }
+
+    /* EXACT SCORE */
+
+    .scores {
+      display: flex;
+      gap: 7px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      margin-top: 8px;
+    }
+
+    .score {
+      min-width: 78px;
+      background: #0a1610;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 9px;
+      text-align: center;
+    }
+
+    .score strong {
+      font-size: 14px;
+    }
+
+    .score small {
+      display: block;
+      color: var(--muted);
+      font-size: 9px;
+      margin-top: 3px;
+    }
+
+    /* REAL ODDS */
+
+    .odds {
+      margin-top: 12px;
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+    }
+
+    .odds-title {
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .odds-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255,255,255,.035);
+    }
+
+    .odds-row:last-child {
+      border-bottom: 0;
+    }
+
+    .odds-row span {
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .odds-row strong {
+      color: var(--yellow);
+      font-size: 12px;
+    }
+
+    /* LINEUPS */
+
+    .details {
+      border-top: 1px solid var(--border);
+    }
+
+    .details summary {
+      cursor: pointer;
+      padding: 13px 14px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #dce8e1;
+      list-style: none;
+    }
+
+    .details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .details summary:after {
+      content: "+";
+      float: right;
+      color: var(--green);
+      font-size: 16px;
+    }
+
+    .details[open] summary:after {
+      content: "−";
+    }
+
+    .details-content {
+      padding: 0 14px 14px;
+    }
+
+    .lineup-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .lineup-team {
+      background: #0a1610;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    .lineup-team h4 {
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+
+    .formation {
+      color: var(--green);
+      font-size: 9px;
+      margin-bottom: 8px;
+    }
+
+    .players {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .player {
+      background: #122119;
+      border-radius: 7px;
+      padding: 5px 7px;
+      font-size: 9px;
+      color: #d9e4de;
+    }
+
+    .player.sub {
+      opacity: .65;
+    }
+
+    /* INJURIES */
+
+    .impact {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #0a1610;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 8px;
+    }
+
+    .impact strong {
+      font-size: 11px;
+    }
+
+    .impact small {
+      display: block;
+      color: var(--muted);
+      font-size: 9px;
+      margin-top: 3px;
+    }
+
+    .impact-score {
+      color: var(--yellow);
+      font-weight: 900;
+      font-size: 12px;
+    }
+
+    .injury {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 7px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+
+    .injury strong {
+      font-size: 10px;
+    }
+
+    .injury small {
+      color: var(--muted);
+      display: block;
+      font-size: 9px;
+      margin-top: 3px;
+    }
+
+    .injury-type {
+      color: var(--red);
+      font-size: 9px;
+      text-align: right;
+    }
+
+    /* COUPON */
+
+    .coupon {
+      background: linear-gradient(145deg, #11251b, #0c1812);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 15px;
+      margin-top: 15px;
+    }
+
+    .coupon-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .coupon-head h3 {
+      font-size: 15px;
+    }
+
+    .clear {
+      border: 0;
+      background: transparent;
+      color: var(--red);
+      font-size: 10px;
+    }
+
+    .coupon-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+
+    .coupon-item strong {
+      font-size: 10px;
+    }
+
+    .coupon-item small {
+      color: var(--muted);
+      display: block;
+      font-size: 8px;
+      margin-top: 3px;
+    }
+
+    .remove {
+      background: transparent;
+      color: var(--red);
+      border: 0;
+    }
+
+    .coupon-total {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    .coupon-total span {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .coupon-total strong {
+      color: var(--green);
+      font-size: 19px;
+    }
+
+    /* STATUS */
+
+    .status-card {
+      background: #101e18;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 15px;
+    }
+
+    .status-line {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+
+    .status-line:last-child {
+      border: 0;
+    }
+
+    .status-line span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .status-line strong {
+      font-size: 11px;
+    }
+
+    .ok {
+      color: var(--green);
+    }
+
+    .off {
+      color: var(--red);
+    }
+
+    /* EMPTY / LOADING */
+
+    .empty {
+      text-align: center;
+      padding: 35px 15px;
+      color: var(--muted);
+      border: 1px dashed var(--border);
+      border-radius: 16px;
+      margin-top: 10px;
+    }
+
+    .empty strong {
+      color: var(--text);
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .loader {
+      text-align: center;
+      padding: 35px;
+      color: var(--green);
+    }
+
+    .spinner {
+      width: 28px;
+      height: 28px;
+      border: 3px solid #183426;
+      border-top-color: var(--green);
+      border-radius: 50%;
+      margin: auto auto 10px;
+      animation: spin .8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .error {
+      background: rgba(255,100,114,.08);
+      border: 1px solid rgba(255,100,114,.25);
+      color: #ff9ba5;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      margin-top: 10px;
+    }
+
+    /* BOTTOM NAV */
+
+    .bottom-nav {
+      position: fixed;
+      left: 50%;
+      bottom: 10px;
+      transform: translateX(-50%);
+      width: calc(100% - 20px);
+      max-width: 700px;
+      background: rgba(10,22,15,.94);
+      backdrop-filter: blur(15px);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 7px;
+      display: grid;
+      grid-template-columns: repeat(5,1fr);
+      z-index: 50;
+      box-shadow: 0 10px 35px rgba(0,0,0,.35);
+    }
+
+    .nav-btn {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      padding: 8px 3px;
+      border-radius: 11px;
+      font-size: 9px;
+    }
+
+    .nav-btn span {
+      display: block;
+      font-size: 17px;
+      margin-bottom: 3px;
+    }
+
+    .nav-btn.active {
+      background: rgba(32,228,123,.1);
+      color: var(--green);
+    }
+
+    .view {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    /* DESKTOP */
+
+    @media (min-width: 700px) {
+      .app {
+        padding: 25px;
+      }
+
+      .controls {
+        grid-template-columns: 1.4fr .8fr .8fr auto;
+        align-items: end;
+      }
+
+      .controls .primary {
+        width: auto;
+        min-width: 150px;
+      }
+
+      .model-grid {
+        grid-template-columns: repeat(6,1fr);
+      }
+
+      .lineup-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .game {
+        border-radius: 21px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <div class="logo">M</div>
+      <div>
+        <h1>Marques Pro</h1>
+        <small>Football Betting Intelligence</small>
+      </div>
+    </div>
+
+    <div class="status-dot">
+      <span class="dot"></span>
+      Online
+    </div>
+  </header>
+
+
+  <!-- ================= HOME ================= -->
+
+  <main id="homeView" class="view active">
+
+    <section class="hero">
+      <h2>Encontre as melhores Props</h2>
+      <p>
+        Analise jogos, probabilidades, gols, escanteios, cartões,
+        chutes, chutes no alvo, ambas marcam, escalações e desfalques.
+      </p>
+
+      <div class="controls">
+
+        <div class="field">
+          <label>Campeonato</label>
+          <select id="leagueSelect">
+            <option>Carregando campeonatos...</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Período</label>
+          <select id="daysSelect">
+            <option value="1">Hoje</option>
+            <option value="2" selected>Hoje + amanhã</option>
+            <option value="3">Próximos 3 dias</option>
+            <option value="7">Próximos 7 dias</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Odd alvo</label>
+          <input id="targetOdd" type="number" value="50" min="1" step="1">
+        </div>
+
+        <button class="primary" onclick="runAnalysis()">
+          ANALISAR JOGOS
+        </button>
+
+      </div>
+    </section>
+
+    <div class="search">
+      <input
+        id="searchInput"
+        placeholder="🔎 Procurar por time..."
+        oninput="renderGames()"
+      >
+    </div>
+
+    <div class="market-tabs" id="marketTabs">
+      <button class="tab active" data-market="all">Todas</button>
+      <button class="tab" data-market="goals">Gols</button>
+      <button class="tab" data-market="btts">BTTS</button>
+      <button class="tab" data-market="corners">Escanteios</button>
+      <button class="tab" data-market="cards">Cartões</button>
+      <button class="tab" data-market="shots">Chutes</button>
+      <button class="tab" data-market="shots_on_target">Chutes no alvo</button>
+      <button class="tab" data-market="double_chance">Dupla chance</button>
+      <button class="tab" data-market="result">Resultado</button>
+    </div>
+
+    <div class="section-title">
+      <h3>Jogos analisados</h3>
+      <span id="gameCount">0 jogos</span>
+    </div>
+
+    <div id="gamesContainer">
+      <div class="empty">
+        <strong>Pronto para analisar</strong>
+        Escolha um campeonato e clique em "Analisar jogos".
+      </div>
+    </div>
+
+  </main>
+
+
+  <!-- ================= PROPS ================= -->
+
+  <section id="propsView" class="view">
+
+    <div class="section-title">
+      <h3>🔥 Melhores Props</h3>
+      <span id="propsCount">0</span>
+    </div>
+
+    <div id="propsContainer">
+      <div class="empty">
+        <strong>Nenhuma prop ainda</strong>
+        Analise os jogos para gerar as melhores oportunidades.
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ================= COUPON ================= -->
+
+  <section id="couponView" class="view">
+
+    <div class="section-title">
+      <h3>🎟️ Meu Cupom</h3>
+      <span id="couponCount">0 seleções</span>
+    </div>
+
+    <div class="coupon">
+
+      <div class="coupon-head">
+        <h3>Múltipla Marques Pro</h3>
+        <button class="clear" onclick="clearCoupon()">LIMPAR</button>
+      </div>
+
+      <div id="couponItems">
+        <div class="empty">
+          <strong>Cupom vazio</strong>
+          Adicione props usando o botão "+".
+        </div>
+      </div>
+
+      <div class="coupon-total">
+        <span>Odd combinada</span>
+        <strong id="couponOdd">1.00</strong>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= STATUS ================= -->
+
+  <section id="statusView" class="view">
+
+    <div class="section-title">
+      <h3>⚙️ Status do sistema</h3>
+    </div>
+
+    <div class="status-card">
+
+      <div class="status-line">
+        <span>API-Football</span>
+        <strong id="statusFootball">Verificando...</strong>
+      </div>
+
+      <div class="status-line">
+        <span>Odds API</span>
+        <strong id="statusOdds">Verificando...</strong>
+      </div>
+
+      <div class="status-line">
+        <span>Campeonatos</span>
+        <strong id="statusLeagues">--</strong>
+      </div>
+
+      <div class="status-line">
+        <span>Modelo</span>
+        <strong class="ok">Marques Pro V15</strong>
+      </div>
+
+      <div class="status-line">
+        <span>Servidor</span>
+        <strong id="statusServer">Online</strong>
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+  <button class="nav-btn active" onclick="showView('homeView', this)">
+    <span>⌂</span>
+    Início
+  </button>
+
+  <button class="nav-btn" onclick="showView('homeView', this); scrollToGames()">
+    <span>⚽</span>
+    Jogos
+  </button>
+
+  <button class="nav-btn" onclick="showView('propsView', this)">
+    <span>🔥</span>
+    Props
+  </button>
+
+  <button class="nav-btn" onclick="showView('couponView', this)">
+    <span>🎟</span>
+    Cupom
+  </button>
+
+  <button class="nav-btn" onclick="showView('statusView', this)">
+    <span>⚙</span>
+    Status
+  </button>
+
+</nav>
+
+
+<script>
+
+  /* =========================================================
+     ESTADO
+  ========================================================= */
+
+  let leagues = [];
+  let games = [];
+  let coupon = [];
+  let activeMarket = "all";
+
+
+  /* =========================================================
+     HELPERS
+  ========================================================= */
+
+  function esc(value) {
+    if (value === null || value === undefined) return "";
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+
+  function num(value, decimals = 2) {
+    const n = Number(value);
+    if (!Number.isFinite(n)) return "-";
+    return n.toFixed(decimals);
+  }
+
+
+  function pct(value) {
+    const n = Number(value);
+    if (!Number.isFinite(n)) return "-";
+    return `${(n * 100).toFixed(1)}%`;
+  }
+
+
+  function formatDate(date) {
+
+    if (!date) return "-";
+
+    const d = new Date(date);
+
+    if (Number.isNaN(d.getTime())) return date;
+
+    return new Intl.DateTimeFormat("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit"
+    }).format(d);
+  }
+
+
+  function marketCategory(key) {
+
+    key = String(key || "").toLowerCase();
+
+    if (
+      key.includes("goal") ||
+      key.includes("over") ||
+      key.includes("under")
+    ) return "goals";
+
+    if (key.includes("btts")) return "btts";
+
+    if (key.includes("corner")) return "corners";
+
+    if (key.includes("card")) return "cards";
+
+    if (
+      key.includes("shot") &&
+      (key.includes("target") || key.includes("sot"))
+    ) return "shots_on_target";
+
+    if (key.includes("shot")) return "shots";
+
+    if (
+      key.includes("double") ||
+      key.includes("chance")
+    ) return "double_chance";
+
+    if (
+      key === "home" ||
+      key === "away" ||
+      key === "draw" ||
+      key.includes("result")
+    ) return "result";
+
+    return "other";
+  }
+
+
+  function propMatchesMarket(prop) {
+
+    if (activeMarket === "all") return true;
+
+    return marketCategory(prop.key) === activeMarket;
+  }
+
+
+  function getPropLabel(prop) {
+
+    return prop.label ||
+           prop.name ||
+           prop.key ||
+           "Mercado";
+  }
+
+
+  function getPropProbability(prop) {
+
+    return Number(
+      prop.probability ??
+      prop.model_probability ??
+      0
+    );
+  }
+
+
+  function getPropFairOdds(prop) {
+
+    const odd = Number(
+      prop.fair_odds ??
+      prop.odds ??
+      0
+    );
+
+    if (odd > 0) return odd;
+
+    const p = getPropProbability();
+
+    return p > 0 ? 1 / p : 0;
+  }
+
+
+  /* =========================================================
+     CARREGAR CAMPEONATOS
+  ========================================================= */
+
+  async function loadLeagues() {
+
+    const select = document.getElementById("leagueSelect");
+
+    try {
+
+      const response = await fetch("/api/leagues");
+
+      if (!response.ok) {
+        throw new Error("Falha ao carregar campeonatos");
+      }
+
+      const data = await response.json();
+
+      leagues = data.leagues || [];
+
+      select.innerHTML = "";
+
+      if (!leagues.length) {
+
+        select.innerHTML =
+          `<option value="">Nenhum campeonato encontrado</option>`;
+
+        return;
+      }
+
+      leagues.forEach((league, index) => {
+
+        const option = document.createElement("option");
+
+        option.value = league.name || league.key || league.id;
+
+        option.textContent = league.name || league.key || "Campeonato";
+
+        if (
+          option.value === "Brasil" ||
+          index === 0
+        ) {
+          option.selected = true;
+        }
+
+        select.appendChild(option);
+
+      });
+
+      document.getElementById("statusLeagues").textContent =
+        leagues.length;
+
+    } catch (error) {
+
+      console.error(error);
+
+      select.innerHTML =
+        `<option value="Brasil">Brasil</option>`;
+
+      document.getElementById("statusLeagues").textContent = "--";
+    }
+  }
+
+
+  /* =========================================================
+     STATUS
+  ========================================================= */
+
+  async function loadStatus() {
+
+    try {
+
+      const response = await fetch("/api/health");
+
+      if (!response.ok) throw new Error();
+
+      const data = await response.json();
+
+      const football = document.getElementById("statusFootball");
+      const odds = document.getElementById("statusOdds");
+
+      if (data.api_football) {
+        football.textContent = "Ativa";
+        football.className = "ok";
+      } else {
+        football.textContent = "Inativa";
+        football.className = "off";
+      }
+
+      if (data.odds_api) {
+        odds.textContent = "Ativa";
+        odds.className = "ok";
+      } else {
+        odds.textContent = "Não configurada";
+        odds.className = "off";
+      }
+
+      if (data.leagues) {
+        document.getElementById("statusLeagues").textContent =
+          data.leagues;
+      }
+
+    } catch (error) {
+
+      document.getElementById("statusFootball").textContent =
+        "Erro";
+
+      document.getElementById("statusFootball").className =
+        "off";
+
+      document.getElementById("statusOdds").textContent =
+        "Erro";
+
+      document.getElementById("statusOdds").className =
+        "off";
+    }
+  }
+
+
+  /* =========================================================
+     ANALISAR
+  ========================================================= */
+
+  async function runAnalysis() {
+
+    const league =
+      document.getElementById("leagueSelect").value;
+
+    const days =
+      document.getElementById("daysSelect").value;
+
+    if (!league) {
+      alert("Escolha um campeonato.");
+      return;
+    }
+
+    const container =
+      document.getElementById("gamesContainer");
+
+    container.innerHTML = `
+      <div class="loader">
+        <div class="spinner"></div>
+        Buscando jogos e calculando probabilidades...
+      </div>
+    `;
+
+    try {
+
+      const url =
+        `/api/analyze?league=${encodeURIComponent(league)}&days=${days}`;
+
+      const response = await fetch(url);
+
+      const data = await response.json();
+
+      if (!response.ok || data.ok === false) {
+
+        throw new Error(
+          data.error || "Erro na análise"
+        );
+      }
+
+      games = data.games || [];
+
+      document.getElementById("gameCount").textContent =
+        `${games.length} jogo${games.length === 1 ? "" : "s"}`;
+
+      renderGames();
+      renderBestProps();
+
+    } catch (error) {
+
+      console.error(error);
+
+      container.innerHTML = `
+        <div class="error">
+          <strong>Não foi possível carregar os jogos.</strong><br>
+          ${esc(error.message || "Erro desconhecido")}
+        </div>
+      `;
+
+      games = [];
+      renderBestProps();
+    }
+  }
+
+
+  /* =========================================================
+     RENDER JOGOS
+  ========================================================= */
+
+  function renderGames() {
+
+    const container =
+      document.getElementById("gamesContainer");
+
+    const search =
+      document.getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    let filtered = games.filter(game => {
+
+      const fixture = game.fixture || {};
+
+      const home =
+        fixture.home?.name ||
+        fixture.home_team ||
+        "";
+
+      const away =
+        fixture.away?.name ||
+        fixture.away_team ||
+        "";
+
+      const text =
+        `${home} ${away}`.toLowerCase();
+
+      return !search || text.includes(search);
+    });
+
+
+    if (!filtered.length) {
+
+      container.innerHTML = `
+        <div class="empty">
+          <strong>Nenhum jogo encontrado</strong>
+          Tente outro campeonato, período ou pesquisa.
+        </div>
+      `;
+
+      return;
+    }
+
+
+    container.innerHTML =
+      filtered.map(renderGame).join("");
+  }
+
+
+  /* =========================================================
+     RENDER GAME
+  ========================================================= */
+
+  function renderGame(game, gameIndex) {
+
+    const fixture =
+      game.fixture || {};
+
+    const model =
+      game.model || {};
+
+    const squad =
+      game.squad || {};
+
+    const home =
+      fixture.home?.name ||
+      fixture.home_team ||
+      "Casa";
+
+    const away =
+      fixture.away?.name ||
+      fixture.away_team ||
+      "Fora";
+
+    const league =
+      game.league ||
+      fixture.league?.name ||
+      "Campeonato";
+
+    const date =
+      fixture.date ||
+      game.date;
+
+    const source =
+      game.source ||
+      "Marques Pro";
+
+
+    const markets =
+      Array.isArray(model.markets)
+        ? model.markets
+        : [];
+
+
+    const filteredMarkets =
+      markets
+        .filter(propMatchesMarket)
+        .sort(
+          (a,b) =>
+            getPropProbability(b) -
+            getPropProbability(a)
+        )
+        .slice(0, 8);
+
+
+    const result =
+      model.result_probabilities ||
+      model.result ||
+      {};
+
+
+    const exactScores =
+      model.exact_scores ||
+      [];
+
+
+    const expectedGoals =
+      model.expected_goals;
+
+    const expectedCorners =
+      model.expected_corners;
+
+    const expectedCards =
+      model.expected_cards;
+
+    const expectedShots =
+      model.expected_shots;
+
+    const expectedSot =
+      model.expected_shots_on_target;
+
+
+    const confidence =
+      model.confidence;
+
+
+    const realOdds =
+      game.real_odds ||
+      game.external_markets ||
+      game.markets_external ||
+      [];
+
+
+    const lineupsAvailable =
+      squad.lineups_available === true;
+
+
+    const gameKey =
+      fixture.id ||
+      game.id ||
+      `${home}-${away}`;
+
+
+    return `
+
+      <article class="game">
+
+        <!-- GAME HEADER -->
+
+        <div class="game-top">
+
+          <div class="game-meta">
+
+            <span class="league">
+              ${esc(league)}
+            </span>
+
+            <span>
+              ${esc(formatDate(date))}
+            </span>
+
+            <span>
+              ${esc(source)}
+            </span>
+
+          </div>
+
+
+          <div class="teams">
+
+            <div class="team">
+              ${esc(home)}
+            </div>
+
+            <div class="vs">
+              VS
+            </div>
+
+            <div class="team away">
+              ${esc(away)}
+            </div>
+
+          </div>
+
+
+          ${
+            confidence !== undefined
+              ? `
+                <div style="margin-top:10px">
+                  <span class="confidence">
+                    ● Confiança ${pct(confidence)}
+                  </span>
+                </div>
+              `
+              : ""
+          }
+
+        </div>
+
+
+        <!-- MODEL -->
+
+        <div class="model">
+
+          <div class="model-grid">
+
+            <div class="stat-box">
+              <small>xG esperado</small>
+              <strong>${num(expectedGoals)}</strong>
+            </div>
+
+            <div class="stat-box">
+              <small>Escanteios</small>
+              <strong>${num(expectedCorners)}</strong>
+            </div>
+
+            <div class="stat-box">
+              <small>Cartões</small>
+              <strong>${num(expectedCards)}</strong>
+            </div>
+
+            <div class="stat-box">
+              <small>Chutes</small>
+              <strong>${num(expectedShots)}</strong>
+            </div>
+
+            <div class="stat-box">
+              <small>Chutes no alvo</small>
+              <strong>${num(expectedSot)}</strong>
+            </div>
+
+            <div class="stat-box">
+              <small>Modelo</small>
+              <strong style="font-size:10px">
+                Marques V15
+              </strong>
+            </div>
+
+          </div>
+
+
+          <!-- RESULTADO -->
+
+          <div class="section-title" style="margin-top:0">
+            <h3 style="font-size:12px">
+              Probabilidade do resultado
+            </h3>
+          </div>
+
+          <div class="result-probs">
+
+            <div class="prob">
+              <small>${esc(home)}</small>
+              <strong>
+                ${pct(
+                  result.home ??
+                  result.home_win ??
+                  result.home_probability
+                )}
+              </strong>
+            </div>
+
+            <div class="prob">
+              <small>Empate</small>
+              <strong>
+                ${pct(
+                  result.draw ??
+                  result.draw_probability
+                )}
+              </strong>
+            </div>
+
+            <div class="prob">
+              <small>${esc(away)}</small>
+              <strong>
+                ${pct(
+                  result.away ??
+                  result.away_win ??
+                  result.away_probability
+                )}
+              </strong>
+            </div>
+
+          </div>
+
+
+          <!-- EXACT SCORES -->
+
+          ${
+            exactScores.length
+              ? `
+                <div class="section-title" style="margin-top:5px">
+                  <h3 style="font-size:12px">
+                    🎯 Placares mais prováveis
+                  </h3>
+                </div>
+
+                <div class="scores">
+
+                  ${
+                    exactScores
+                      .slice(0,6)
+                      .map(score => {
+
+                        const label =
+                          score.score ||
+                          score.result ||
+                          `${score.home}-${score.away}`;
+
+                        const probability =
+                          score.probability ??
+                          score.prob ??
+                          0;
+
+                        return `
+                          <div class="score">
+                            <strong>${esc(label)}</strong>
+                            <small>${pct(probability)}</small>
+                          </div>
+                        `;
+
+                      })
+                      .join("")
+                  }
+
+                </div>
+              `
+              : ""
+          }
+
+
+          <!-- PROPS -->
+
+          <div class="section-title">
+            <h3 style="font-size:12px">
+              🔥 Melhores Props
+            </h3>
+
+            <span>
+              ${filteredMarkets.length}
+            </span>
+          </div>
+
+
+          <div class="props">
+
+            ${
+              filteredMarkets.length
+                ? filteredMarkets.map((prop, propIndex) => {
+
+                    const probability =
+                      getPropProbability(prop);
+
+                    const fairOdd =
+                      getPropFairOdds(prop);
+
+                    const edge =
+                      Number(
+                        prop.edge ??
+                        prop.value ??
+                        0
+                      );
+
+                    const label =
+                      getPropLabel(prop);
+
+                    const propId =
+                      `${gameKey}-${prop.key}-${propIndex}`;
+
+
+                    return `
+
+                      <div class="prop">
+
+                        <div class="prop-info">
+
+                          <strong>
+                            ${esc(label)}
+                          </strong>
+
+                          <small>
+                            Probabilidade:
+                            ${pct(probability)}
+                            · Odd justa:
+                            ${num(fairOdd)}
+                          </small>
+
+                        </div>
+
+
+                        <div class="prop-side">
+
+                          <span class="odd">
+                            ${num(fairOdd)}
+                          </span>
+
+                          ${
+                            edge > 0
+                              ? `
+                                <span class="value">
+                                  +${(edge * 100).toFixed(1)}% VALOR
+                                </span>
+                              `
+                              : ""
+                          }
+
+                          <button
+                            class="add-prop"
+                            onclick='addToCoupon(${JSON.stringify({
+                              id: propId,
+                              label: `${home} x ${away} — ${label}`,
+                              odd: fairOdd,
+                              probability: probability,
+                              source: "modelo"
+                            })})'
+                          >
+                            +
+                          </button>
+
+                        </div>
+
+                      </div>
+                    `;
+
+                  }).join("")
+
+                : `
+                  <div class="empty">
+                    Nenhuma prop disponível para este filtro.
+                  </div>
+                `
+            }
+
+          </div>
+
+
+          <!-- REAL ODDS -->
+
+          ${
+            realOdds.length
+              ? renderRealOdds(realOdds)
+              : `
+                <div class="odds">
+                  <div class="odds-title">
+                    💰 Odds de mercado
+                  </div>
+
+                  <div style="
+                    color:var(--muted);
+                    font-size:9px;
+                    line-height:1.5;
+                  ">
+                    Odds de casas não disponíveis.
+                    As cotações acima são probabilidades/odds justas
+                    calculadas pelo modelo.
+                  </div>
+                </div>
+              `
+          }
+
+        </div>
+
+
+        <!-- LINEUPS -->
+
+        <details class="details">
+
+          <summary>
+            👥 Escalações
+            ${
+              lineupsAvailable
+                ? "— disponíveis"
+                : "— aguardando publicação"
+            }
+          </summary>
+
+          <div class="details-content">
+
+            ${
+              lineupsAvailable
+                ? renderLineups(squad, home, away)
+                : `
+                  <div class="empty">
+                    <strong>Escalação oficial ainda não disponível</strong>
+                    A API ainda não recebeu as escalações deste jogo.
+                    Confira novamente mais perto do início da partida.
+                  </div>
+                `
+            }
+
+          </div>
+
+        </details>
+
+
+        <!-- INJURIES -->
+
+        <details class="details">
+
+          <summary>
+            🚑 Desfalques e informações do elenco
+          </summary>
+
+          <div class="details-content">
+
+            ${renderInjuries(squad, home, away)}
+
+          </div>
+
+        </details>
+
+      </article>
+    `;
+  }
+
+
+  /* =========================================================
+     REAL ODDS
+  ========================================================= */
+
+  function renderRealOdds(odds) {
+
+    const list =
+      Array.isArray(odds)
+        ? odds
+        : [];
+
+    if (!list.length) return "";
+
+    return `
+
+      <div class="odds">
+
+        <div class="odds-title">
+          💰 Odds encontradas no mercado
+        </div>
+
+        ${
+          list
+            .slice(0,12)
+            .map(o => {
+
+              const bookmaker =
+                o.bookmaker ||
+                o.source ||
+                "Casa";
+
+              const market =
+                o.market ||
+                "Mercado";
+
+              const name =
+                o.name ||
+                o.outcome ||
+                "";
+
+              const price =
+                Number(o.price ?? o.odds ?? 0);
+
+              const edge =
+                Number(o.edge ?? 0);
+
+
+              return `
+
+                <div class="odds-row">
+
+                  <span>
+                    ${esc(bookmaker)}
+                    · ${esc(market)}
+                    · ${esc(name)}
+                  </span>
+
+                  <strong>
+                    ${price > 0 ? num(price) : "-"}
+                    ${
+                      edge > 0
+                        ? ` · +${(edge*100).toFixed(1)}%`
+                        : ""
+                    }
+                  </strong>
+
+                </div>
+
+              `;
+
+            })
+            .join("")
+        }
+
+      </div>
+
+    `;
+  }
+
+
+  /* =========================================================
+     LINEUPS
+  ========================================================= */
+
+  function renderLineups(squad, home, away) {
+
+    const lineups =
+      squad.lineups ||
+      squad.teams ||
+      {};
+
+
+    const values =
+      Object.values(lineups);
+
+
+    if (!values.length) {
+
+      return `
+        <div class="empty">
+          Dados de escalação não encontrados.
+        </div>
+      `;
+    }
+
+
+    return `
+
+      <div class="lineup-grid">
+
+        ${
+          values.slice(0,2).map((team, index) => {
+
+            const teamName =
+              team.name ||
+              team.team_name ||
+              (index === 0 ? home : away);
+
+            const formation =
+              team.formation ||
+              "Formação não informada";
+
+
+            const starters =
+              team.starting_xi ||
+              team.startingXI ||
+              team.starting ||
+              [];
+
+
+            const substitutes =
+              team.substitutes ||
+              team.bench ||
+              [];
+
+
+            return `
+
+              <div class="lineup-team">
+
+                <h4>
+                  ${esc(teamName)}
+                </h4>
+
+                <div class="formation">
+                  Formação: ${esc(formation)}
+                </div>
+
+                <div class="players">
+
+                  ${
+                    starters.length
+                      ? starters.map(p => {
+
+                          const name =
+                            typeof p === "string"
+                              ? p
+                              : p.name ||
+                                p.player?.name ||
+                                "Jogador";
+
+                          return `
+                            <span class="player">
+                              ${esc(name)}
+                            </span>
+                          `;
+
+                        }).join("")
+                      : `
+                        <span class="player">
+                          XI não informado
+                        </span>
+                      `
+                  }
+
+                </div>
+
+
+                ${
+                  substitutes.length
+                    ? `
+                      <div style="
+                        margin-top:10px;
+                        color:var(--muted);
+                        font-size:9px;
+                      ">
+                        Reservas
+                      </div>
+
+                      <div class="players" style="margin-top:5px">
+
+                        ${
+                          substitutes
+                            .slice(0,12)
+                            .map(p => {
+
+                              const name =
+                                typeof p === "string"
+                                  ? p
+                                  : p.name ||
+                                    p.player?.name ||
+                                    "Jogador";
+
+                              return `
+                                <span class="player sub">
+                                  ${esc(name)}
+                                </span>
+                              `;
+
+                            })
+                            .join("")
+                        }
+
+                      </div>
+                    `
+                    : ""
+                }
+
+              </div>
+
+            `;
+
+          }).join("")
+        }
+
+      </div>
+
+    `;
+  }
+
+
+  /* =========================================================
+     INJURIES
+  ========================================================= */
+
+  function renderInjuries(squad, home, away) {
+
+    const teams =
+      squad.teams ||
+      {};
+
+    const injuries =
+      Array.isArray(squad.injuries)
+        ? squad.injuries
+        : [];
+
+
+    let html = "";
+
+
+    const teamValues =
+      Object.values(teams);
+
+
+    if (teamValues.length) {
+
+      html += `
+
+        <div class="lineup-grid">
+
+          ${
+            teamValues.slice(0,2).map((team, index) => {
+
+              const teamName =
+                team.name ||
+                team.team_name ||
+                (index === 0 ? home : away);
+
+              const impactScore =
+                Number(team.impact_score ?? 0);
+
+              const impactLevel =
+                team.impact_level ||
+                "normal";
+
+              const injuryCount =
+                team.injury_count ?? 0;
+
+              const suspensionCount =
+                team.suspension_count ?? 0;
+
+
+              return `
+
+                <div class="impact">
+
+                  <div>
+
+                    <strong>
+                      ${esc(teamName)}
+                    </strong>
+
+                    <small>
+                      ${injuryCount} lesão(ões)
+                      · ${suspensionCount} suspensão(ões)
+                      · impacto ${esc(impactLevel)}
+                    </small>
+
+                  </div>
+
+                  <div class="impact-score">
+                    ${num(impactScore,1)}
+                  </div>
+
+                </div>
+
+              `;
+
+            }).join("")
+          }
+
+        </div>
+
+      `;
+    }
+
+
+    if (injuries.length) {
+
+      html += `
+
+        <div style="
+          margin-top:10px;
+          font-size:11px;
+          font-weight:800;
+        ">
+          Desfalques identificados
+        </div>
+
+      `;
+
+
+      html += injuries
+        .slice(0,20)
+        .map(item => {
+
+          const player =
+            item.player ||
+            item.name ||
+            "Jogador";
+
+          const team =
+            item.team ||
+            item.team_name ||
+            "";
+
+          const type =
+            item.type ||
+            item.status ||
+            "Indisponível";
+
+          const reason =
+            item.reason ||
+            item.description ||
+            "";
+
+
+          return `
+
+            <div class="injury">
+
+              <div>
+
+                <strong>
+                  ${esc(player)}
+                </strong>
+
+                <small>
+                  ${esc(team)}
+                  ${reason ? " · " + esc(reason) : ""}
+                </small>
+
+              </div>
+
+              <div class="injury-type">
+                ${esc(type)}
+              </div>
+
+            </div>
+
+          `;
+
+        })
+        .join("");
+
+    } else {
+
+      html += `
+
+        <div class="empty">
+
+          <strong>
+            Nenhum desfalque informado
+          </strong>
+
+          A API não retornou lesões ou suspensões
+          para esta partida.
+
+        </div>
+
+      `;
+    }
+
+
+    return html;
+  }
+
+
+  /* =========================================================
+     MELHORES PROPS
+  ========================================================= */
+
+  function renderBestProps() {
+
+    const container =
+      document.getElementById("propsContainer");
+
+    let allProps = [];
+
+
+    games.forEach((game, gameIndex) => {
+
+      const fixture =
+        game.fixture || {};
+
+      const model =
+        game.model || {};
+
+      const markets =
+        Array.isArray(model.markets)
+          ? model.markets
+          : [];
+
+
+      const home =
+        fixture.home?.name ||
+        fixture.home_team ||
+        "Casa";
+
+      const away =
+        fixture.away?.name ||
+        fixture.away_team ||
+        "Fora";
+
+
+      markets.forEach((prop, propIndex) => {
+
+        const probability =
+          getPropProbability(prop);
+
+        const odd =
+          getPropFairOdds(prop);
+
+        if (probability <= 0 || odd <= 0) return;
+
+
+        allProps.push({
+          ...prop,
+          probability,
+          fair_odds: odd,
+          home,
+          away,
+          gameIndex,
+          propIndex
+        });
+
+      });
+
+    });
+
+
+    allProps.sort(
+      (a,b) =>
+        b.probability -
+        a.probability
+    );
+
+
+    const top =
+      allProps
+        .filter(propMatchesMarket)
+        .slice(0,20);
+
+
+    document.getElementById("propsCount").textContent =
+      top.length;
+
+
+    if (!top.length) {
+
+      container.innerHTML = `
+        <div class="empty">
+          <strong>Nenhuma prop disponível</strong>
+          Faça uma análise primeiro.
+        </div>
+      `;
+
+      return;
+    }
+
+
+    container.innerHTML = top.map((prop,index) => {
+
+      const label =
+        getPropLabel(prop);
+
+      const probability =
+        prop.probability;
+
+      const odd =
+        prop.fair_odds;
+
+
+      return `
+
+        <div class="prop" style="margin-bottom:8px">
+
+          <div class="prop-info">
+
+            <strong>
+              #${index+1}
+              · ${esc(prop.home)}
+              x ${esc(prop.away)}
+            </strong>
+
+            <small>
+              ${esc(label)}
+              · ${pct(probability)}
+            </small>
+
+          </div>
+
+
+          <div class="prop-side">
+
+            <span class="odd">
+              ${num(odd)}
+            </span>
+
+            <button
+              class="add-prop"
+              onclick='addToCoupon(${JSON.stringify({
+                id:`best-${prop.gameIndex}-${prop.propIndex}`,
+                label:`${prop.home} x ${prop.away} — ${label}`,
+                odd:odd,
+                probability:probability,
+                source:"modelo"
+              })})'
+            >
+              +
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+  }
+
+
+  /* =========================================================
+     CUPOM
+  ========================================================= */
+
+  function addToCoupon(item) {
+
+    if (!item || !item.id) return;
+
+
+    const exists =
+      coupon.some(x => x.id === item.id);
+
+
+    if (exists) return;
+
+
+    coupon.push(item);
+
+    renderCoupon();
+
+    showView(
+      "couponView",
+      document.querySelectorAll(".nav-btn")[3]
+    );
+  }
+
+
+  function removeFromCoupon(index) {
+
+    coupon.splice(index,1);
+
+    renderCoupon();
+  }
+
+
+  function clearCoupon() {
+
+    coupon = [];
+
+    renderCoupon();
+  }
+
+
+  function renderCoupon() {
+
+    const container =
+      document.getElementById("couponItems");
+
+    document.getElementById("couponCount").textContent =
+      `${coupon.length} seleção${coupon.length === 1 ? "" : "ões"}`;
+
+
+    if (!coupon.length) {
+
+      container.innerHTML = `
+        <div class="empty">
+          <strong>Cupom vazio</strong>
+          Adicione props usando o botão "+".
+        </div>
+      `;
+
+      document.getElementById("couponOdd").textContent =
+        "1.00";
+
+      return;
+    }
+
+
+    let totalOdd = 1;
+
+
+    container.innerHTML =
+      coupon.map((item,index) => {
+
+        const odd =
+          Number(item.odd);
+
+        if (odd > 0) totalOdd *= odd;
+
+
+        return `
+
+          <div class="coupon-item">
+
+            <div>
+
+              <strong>
+                ${esc(item.label)}
+              </strong>
+
+              <small>
+                Odd modelo: ${num(odd)}
+                · ${pct(item.probability)}
+              </small>
+
+            </div>
+
+            <button
+              class="remove"
+              onclick="removeFromCoupon(${index})"
+            >
+              ×
+            </button>
+
+          </div>
+
+        `;
+
+      }).join("");
+
+
+    document.getElementById("couponOdd").textContent =
+      num(totalOdd);
+  }
+
+
+  /* =========================================================
+     NAV
+  ========================================================= */
+
+  function showView(id, button) {
+
+    document
+      .querySelectorAll(".view")
+      .forEach(view =>
+        view.classList.remove("active")
+      );
+
+
+    document
+      .getElementById(id)
+      .classList.add("active");
+
+
+    document
+      .querySelectorAll(".nav-btn")
+      .forEach(btn =>
+        btn.classList.remove("active")
+      );
+
+
+    if (button) {
+      button.classList.add("active");
+    }
+
+
+    if (id === "propsView") {
+      renderBestProps();
+    }
+
+    if (id === "couponView") {
+      renderCoupon();
+    }
+  }
+
+
+  function scrollToGames() {
+
+    showView(
+      "homeView",
+      document.querySelectorAll(".nav-btn")[1]
+    );
+
+    setTimeout(() => {
+
+      document
+        .getElementById("gamesContainer")
+        .scrollIntoView({
+          behavior:"smooth"
+        });
+
+    },100);
+  }
+
+
+  /* =========================================================
+     FILTRO DE MERCADOS
+  ========================================================= */
+
+  document
+    .getElementById("marketTabs")
+    .addEventListener("click", event => {
+
+      const button =
+        event.target.closest(".tab");
+
+      if (!button) return;
+
+
+      activeMarket =
+        button.dataset.market;
+
+
+      document
+        .querySelectorAll(".tab")
+        .forEach(tab =>
+          tab.classList.remove("active")
+        );
+
+
+      button.classList.add("active");
+
+      renderGames();
+      renderBestProps();
+    });
+
+
+  /* =========================================================
+     START
+  ========================================================= */
+
+  document.addEventListener("DOMContentLoaded", async () => {
+
+    await loadLeagues();
+
+    await loadStatus();
+
+    renderCoupon();
+
+  });
+
+</script>
+
+</body>
+</html>
